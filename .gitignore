@@ -22,6 +22,7 @@ node_modules/
 .pnp.js
 
 build/
+.idea/
 
 # testing
 frontend/coverage
