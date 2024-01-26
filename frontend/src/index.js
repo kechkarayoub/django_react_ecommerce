@@ -7,6 +7,14 @@ import './bootstrap.min.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+console.log('00000000000000')
+console.log(process.env)
+// activate .env file
+require('dotenv').config();
+console.log('11111111111111111111')
+console.log(process.env)
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

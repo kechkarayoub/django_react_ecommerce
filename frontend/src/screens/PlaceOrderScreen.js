@@ -6,6 +6,7 @@ import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function PlaceOrderScreen({ history }) {
 
@@ -83,7 +84,7 @@ function PlaceOrderScreen({ history }) {
                                             <ListGroup.Item key={index}>
                                                 <Row>
                                                     <Col md={1}>
-                                                        <Image src={item.image} alt={item.name} fluid rounded />
+                                                        <Image src={BACKEND_URL + item.image} alt={item.name} fluid rounded />
                                                     </Col>
 
                                                     <Col>

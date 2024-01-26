@@ -36,6 +36,7 @@ import {
 } from '../constants/userConstants'
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+const instance_backend = axios.create({ baseURL: process.env.REACT_APP_URL_BACKEND });
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -49,7 +50,7 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(
+        const { data } = await instance_backend.post(
             '/api/users/login/',
             { 'username': email, 'password': password },
             config
@@ -94,7 +95,7 @@ export const register = (name, email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(
+        const { data } = await instance_backend.post(
             '/api/users/register/',
             { 'name': name, 'email': email, 'password': password },
             config
@@ -140,7 +141,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(
+        const { data } = await instance_backend.get(
             `/api/users/${id}/`,
             config
         )
@@ -179,7 +180,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
+        const { data } = await instance_backend.put(
             `/api/users/profile/update/`,
             user,
             config
@@ -225,7 +226,7 @@ export const listUsers = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(
+        const { data } = await instance_backend.get(
             `/api/users/`,
             config
         )
@@ -264,7 +265,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(
+        const { data } = await instance_backend.delete(
             `/api/users/delete/${id}/`,
             config
         )
@@ -303,7 +304,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
+        const { data } = await instance_backend.put(
             `/api/users/update/${user._id}/`,
             user,
             config

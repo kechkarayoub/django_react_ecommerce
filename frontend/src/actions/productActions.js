@@ -30,13 +30,14 @@ import {
     PRODUCT_TOP_FAIL,
 
 } from '../constants/productConstants'
+const instance_backend = axios.create({ baseURL: process.env.REACT_APP_URL_BACKEND });
 
 
 export const listProducts = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await axios.get(`/api/products${keyword}`)
+        const { data } = await instance_backend.get(`/api/products${keyword}`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -57,7 +58,7 @@ export const listTopProducts = () => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_TOP_REQUEST })
 
-        const { data } = await axios.get(`/api/products/top/`)
+        const { data } = await instance_backend.get(`/api/products/top/`)
 
         dispatch({
             type: PRODUCT_TOP_SUCCESS,
@@ -79,7 +80,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/products/${id}`)
+        const { data } = await instance_backend.get(`/api/products/${id}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -114,7 +115,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(
+        const { data } = await instance_backend.delete(
             `/api/products/delete/${id}/`,
             config
         )
@@ -154,7 +155,7 @@ export const createProduct = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.post(
+        const { data } = await instance_backend.post(
             `/api/products/create/`,
             {},
             config
@@ -194,7 +195,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
+        const { data } = await instance_backend.put(
             `/api/products/update/${product._id}/`,
             product,
             config
@@ -238,7 +239,7 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
             }
         }
 
-        const { data } = await axios.post(
+        const { data } = await instance_backend.post(
             `/api/products/${productId}/reviews/`,
             review,
             config

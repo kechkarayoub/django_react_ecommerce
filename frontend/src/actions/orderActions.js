@@ -29,6 +29,7 @@ import {
 } from '../constants/orderConstants'
 
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
+const instance_backend = axios.create({ baseURL: process.env.REACT_APP_URL_BACKEND });
 
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -48,7 +49,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.post(
+        const { data } = await instance_backend.post(
             `/api/orders/add/`,
             order,
             config
@@ -95,7 +96,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(
+        const { data } = await instance_backend.get(
             `/api/orders/${id}/`,
             config
         )
@@ -135,7 +136,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
+        const { data } = await instance_backend.put(
             `/api/orders/${id}/pay/`,
             paymentResult,
             config
@@ -175,7 +176,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
+        const { data } = await instance_backend.put(
             `/api/orders/${order._id}/deliver/`,
             {},
             config
@@ -216,7 +217,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(
+        const { data } = await instance_backend.get(
             `/api/orders/myorders/`,
             config
         )
@@ -255,7 +256,7 @@ export const listOrders = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(
+        const { data } = await instance_backend.get(
             `/api/orders/`,
             config
         )

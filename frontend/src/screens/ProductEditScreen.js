@@ -30,7 +30,9 @@ function ProductEditScreen({ match, history }) {
 
     const productUpdate = useSelector(state => state.productUpdate)
     const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = productUpdate
+    const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
+    const instance_backend = axios.create({ baseURL: process.env.REACT_APP_URL_BACKEND });
 
     useEffect(() => {
 
@@ -86,7 +88,7 @@ function ProductEditScreen({ match, history }) {
                 }
             }
 
-            const { data } = await axios.post('/api/products/upload/', formData, config)
+            const { data } = await instance_backend.post('/api/products/upload/', formData, config)
 
 
             setImage(data)

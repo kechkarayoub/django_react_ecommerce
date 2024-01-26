@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
+const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function OrderScreen({ match, history }) {
     const orderId = match.params.id
@@ -127,7 +128,7 @@ function OrderScreen({ match, history }) {
                                                     <ListGroup.Item key={index}>
                                                         <Row>
                                                             <Col md={1}>
-                                                                <Image src={item.image} alt={item.name} fluid rounded />
+                                                                <Image src={BACKEND_URL + item.image} alt={item.name} fluid rounded />
                                                             </Col>
 
                                                             <Col>

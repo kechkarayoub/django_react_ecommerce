@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listProductDetails, createProductReview } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function ProductScreen({ match, history }) {
     const [qty, setQty] = useState(1)
@@ -64,7 +65,7 @@ function ProductScreen({ match, history }) {
                         <div>
                             <Row>
                                 <Col md={6}>
-                                    <Image src={product.image} alt={product.name} fluid />
+                                    <Image src={BACKEND_URL + product.image} alt={product.name} fluid />
                                 </Col>
 
 
