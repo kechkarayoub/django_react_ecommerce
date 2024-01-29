@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { withTranslation } from 'react-i18next';
 
 function FormContainer({ children }) {
     return (
@@ -13,4 +14,4 @@ function FormContainer({ children }) {
     )
 }
 
-export default FormContainer
+export default withTranslation('translations')(FormContainer)

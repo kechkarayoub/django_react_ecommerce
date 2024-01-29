@@ -7,8 +7,9 @@ import Message from '../components/Message'
 import Paginate from '../components/Paginate'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import { withTranslation } from 'react-i18next';
 
-function ProductListScreen({ history, match }) {
+function ProductListScreen({ history, match, t }) {
 
     const dispatch = useDispatch()
 
@@ -57,12 +58,12 @@ function ProductListScreen({ history, match }) {
         <div>
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Products</h1>
+                    <h1>{t("Products")}</h1>
                 </Col>
 
                 <Col className='text-right'>
                     <Button className='my-3' onClick={createProductHandler}>
-                        <i className='fas fa-plus'></i> Create Product
+                        <i className='fas fa-plus'></i> {t("Create Product")}
                     </Button>
                 </Col>
             </Row>
@@ -83,11 +84,11 @@ function ProductListScreen({ history, match }) {
                             <Table striped bordered hover responsive className='table-sm'>
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>NAME</th>
-                                        <th>PRICE</th>
-                                        <th>CATEGORY</th>
-                                        <th>BRAND</th>
+                                        <th>{t("ID")}</th>
+                                        <th>{t("NAME")}</th>
+                                        <th>{t("PRICE")}</th>
+                                        <th>{t("CATEGORY")}</th>
+                                        <th>{t("BRAND")}</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -123,4 +124,4 @@ function ProductListScreen({ history, match }) {
     )
 }
 
-export default ProductListScreen
+export default withTranslation('translations')(ProductListScreen)

@@ -5,6 +5,7 @@ import { Carousel, Image } from 'react-bootstrap'
 import Loader from './Loader'
 import Message from './Message'
 import { listTopProducts } from '../actions/productActions'
+import { withTranslation } from 'react-i18next';
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function ProductCarousel() {
@@ -38,4 +39,4 @@ function ProductCarousel() {
     )
 }
 
-export default ProductCarousel
+export default withTranslation('translations')(ProductCarousel)

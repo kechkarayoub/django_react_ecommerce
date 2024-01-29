@@ -1,6 +1,7 @@
 import React from 'react'
 import { Pagination } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { withTranslation } from 'react-i18next';
 
 function Paginate({ pages, page, keyword = '', isAdmin = false }) {
     if (keyword) {
@@ -25,4 +26,4 @@ function Paginate({ pages, page, keyword = '', isAdmin = false }) {
     )
 }
 
-export default Paginate
+export default withTranslation('translations')(Paginate)

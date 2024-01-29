@@ -2,10 +2,11 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
+import { withTranslation } from 'react-i18next';
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
-function Product({ product }) {
+function Product({ product, t }) {
     return (
         <Card className="my-3 p-3 rounded">
             <Link to={`/product/${product._id}`}>
@@ -21,7 +22,7 @@ function Product({ product }) {
 
                 <Card.Text as="div">
                     <div className="my-3">
-                        <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
+                        <Rating value={product.rating} text={`${product.numReviews} ${t(product.numReviews > 1 ? "reviews" : "review")}`} color={'#f8e825'} />
                     </div>
                 </Card.Text>
 
@@ -34,4 +35,4 @@ function Product({ product }) {
     )
 }
 
-export default Product
+export default withTranslation('translations')(Product)

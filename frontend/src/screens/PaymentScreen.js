@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { savePaymentMethod } from '../actions/cartActions'
+import { withTranslation } from 'react-i18next';
 
-function PaymentScreen({ history }) {
+function PaymentScreen({ history, t }) {
 
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart
@@ -30,7 +31,7 @@ function PaymentScreen({ history }) {
 
             <Form onSubmit={submitHandler}>
                 <Form.Group>
-                    <Form.Label as='legend'>Select Method</Form.Label>
+                    <Form.Label as='legend'>{t("Select Method")}</Form.Label>
                     <Col>
                         <Form.Check
                             type='radio'
@@ -46,11 +47,11 @@ function PaymentScreen({ history }) {
                 </Form.Group>
 
                 <Button type='submit' variant='primary'>
-                    Continue
+                    {t("Continue")}
                 </Button>
             </Form>
         </FormContainer>
     )
 }
 
-export default PaymentScreen
+export default withTranslation('translations')(PaymentScreen)

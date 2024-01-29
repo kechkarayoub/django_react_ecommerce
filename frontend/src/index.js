@@ -5,19 +5,19 @@ import store from './store'
 import './index.css';
 import './bootstrap.min.css'
 import App from './App';
+import i18next from './i18n_init';
 import reportWebVitals from './reportWebVitals';
+import { I18nextProvider } from 'react-i18next';
 
 
-console.log('00000000000000')
-console.log(process.env)
 // activate .env file
 require('dotenv').config();
-console.log('11111111111111111111')
-console.log(process.env)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <I18nextProvider i18n={i18next}>
+      <App />
+    </I18nextProvider>
   </Provider>,
   document.getElementById('root')
 );

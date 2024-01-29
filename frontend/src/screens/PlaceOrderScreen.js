@@ -6,9 +6,10 @@ import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import { withTranslation } from 'react-i18next';
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
-function PlaceOrderScreen({ history }) {
+function PlaceOrderScreen({ history, t }) {
 
     const orderCreate = useSelector(state => state.orderCreate)
     const { order, error, success } = orderCreate
@@ -54,10 +55,10 @@ function PlaceOrderScreen({ history }) {
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Shipping</h2>
+                            <h2>{t("Shipping")}</h2>
 
                             <p>
-                                <strong>Shipping: </strong>
+                                <strong>{t("Shipping")}: </strong>
                                 {cart.shippingAddress.address},  {cart.shippingAddress.city}
                                 {'  '}
                                 {cart.shippingAddress.postalCode},
@@ -67,17 +68,17 @@ function PlaceOrderScreen({ history }) {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <h2>Payment Method</h2>
+                            <h2>{t("Payment Method")}</h2>
                             <p>
-                                <strong>Method: </strong>
+                                <strong>{t("Method")}: </strong>
                                 {cart.paymentMethod}
                             </p>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <h2>Order Items</h2>
+                            <h2>{t("Order Items")}</h2>
                             {cart.cartItems.length === 0 ? <Message variant='info'>
-                                Your cart is empty
+                                {t("Your cart is empty")}
                             </Message> : (
                                     <ListGroup variant='flush'>
                                         {cart.cartItems.map((item, index) => (
@@ -109,33 +110,33 @@ function PlaceOrderScreen({ history }) {
                     <Card>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
-                                <h2>Order Summary</h2>
+                                <h2>{t("Order Summary")}</h2>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Items:</Col>
+                                    <Col>{t("Items")}:</Col>
                                     <Col>${cart.itemsPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Shipping:</Col>
+                                    <Col>{t("Shipping")}:</Col>
                                     <Col>${cart.shippingPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Tax:</Col>
+                                    <Col>{t("Tax")}:</Col>
                                     <Col>${cart.taxPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Total:</Col>
+                                    <Col>{t("Total")}:</Col>
                                     <Col>${cart.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
@@ -152,7 +153,7 @@ function PlaceOrderScreen({ history }) {
                                     disabled={cart.cartItems === 0}
                                     onClick={placeOrder}
                                 >
-                                    Place Order
+                                    {t("Place Order")}
                                 </Button>
                             </ListGroup.Item>
 
@@ -164,4 +165,4 @@ function PlaceOrderScreen({ history }) {
     )
 }
 
-export default PlaceOrderScreen
+export default withTranslation('translations')(PlaceOrderScreen)

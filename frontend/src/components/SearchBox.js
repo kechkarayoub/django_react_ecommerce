@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import { withTranslation } from 'react-i18next';
 
-function SearchBox() {
+function SearchBox({t}) {
     const [keyword, setKeyword] = useState('')
 
     let history = useHistory()
@@ -29,10 +30,10 @@ function SearchBox() {
                 variant='outline-success'
                 className='p-2'
             >
-                Submit
+                {t("Submit")}
             </Button>
         </Form>
     )
 }
 
-export default SearchBox
+export default withTranslation('translations')(SearchBox)

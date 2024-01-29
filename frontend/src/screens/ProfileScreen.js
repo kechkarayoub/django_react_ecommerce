@@ -8,8 +8,9 @@ import Message from '../components/Message'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 import { listMyOrders } from '../actions/orderActions'
+import { withTranslation } from 'react-i18next';
 
-function ProfileScreen({ history }) {
+function ProfileScreen({ history, t }) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -66,7 +67,7 @@ function ProfileScreen({ history }) {
     return (
         <Row>
             <Col md={3}>
-                <h2>User Profile</h2>
+                <h2>{t("User Profile")}</h2>
 
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
@@ -74,11 +75,11 @@ function ProfileScreen({ history }) {
                 <Form onSubmit={submitHandler}>
 
                     <Form.Group controlId='name'>
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>{t("Name")}</Form.Label>
                         <Form.Control
                             required
                             type='name'
-                            placeholder='Enter name'
+                            placeholder={t('Enter name')}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         >
@@ -86,11 +87,11 @@ function ProfileScreen({ history }) {
                     </Form.Group>
 
                     <Form.Group controlId='email'>
-                        <Form.Label>Email Address</Form.Label>
+                        <Form.Label>{t("Email Address")}</Form.Label>
                         <Form.Control
                             required
                             type='email'
-                            placeholder='Enter Email'
+                            placeholder={t('Enter Email')}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         >
@@ -98,11 +99,11 @@ function ProfileScreen({ history }) {
                     </Form.Group>
 
                     <Form.Group controlId='password'>
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>{t("Password")}</Form.Label>
                         <Form.Control
 
                             type='password'
-                            placeholder='Enter Password'
+                            placeholder={t('Enter Password')}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         >
@@ -110,11 +111,11 @@ function ProfileScreen({ history }) {
                     </Form.Group>
 
                     <Form.Group controlId='passwordConfirm'>
-                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Label>{t("Confirm Password")}</Form.Label>
                         <Form.Control
 
                             type='password'
-                            placeholder='Confirm Password'
+                            placeholder={t('Confirm Password')}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         >
@@ -122,14 +123,14 @@ function ProfileScreen({ history }) {
                     </Form.Group>
 
                     <Button type='submit' variant='primary'>
-                        Update
+                        {t("Update")}
                 </Button>
 
                 </Form>
             </Col>
 
             <Col md={9}>
-                <h2>My Orders</h2>
+                <h2>{t("My Orders")}</h2>
                 {loadingOrders ? (
                     <Loader />
                 ) : errorOrders ? (
@@ -138,11 +139,11 @@ function ProfileScreen({ history }) {
                             <Table striped responsive className='table-sm'>
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Date</th>
-                                        <th>Total</th>
-                                        <th>Paid</th>
-                                        <th>Delivered</th>
+                                        <th>{t("ID")}</th>
+                                        <th>{t("Date")}</th>
+                                        <th>{t("Total")}</th>
+                                        <th>{t("Paid")}</th>
+                                        <th>{t("Delivered")}</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -158,7 +159,7 @@ function ProfileScreen({ history }) {
                                             )}</td>
                                             <td>
                                                 <LinkContainer to={`/order/${order._id}`}>
-                                                    <Button className='btn-sm'>Details</Button>
+                                                    <Button className='btn-sm'>{t("Details")}</Button>
                                                 </LinkContainer>
                                             </td>
                                         </tr>
@@ -171,4 +172,4 @@ function ProfileScreen({ history }) {
     )
 }
 
-export default ProfileScreen
+export default withTranslation('translations')(ProfileScreen)

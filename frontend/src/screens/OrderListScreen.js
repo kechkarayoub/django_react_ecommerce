@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listOrders } from '../actions/orderActions'
+import { withTranslation } from 'react-i18next';
 
-function OrderListScreen({ history }) {
+function OrderListScreen({ history, t }) {
 
     const dispatch = useDispatch()
 
@@ -30,7 +31,7 @@ function OrderListScreen({ history }) {
 
     return (
         <div>
-            <h1>Orders</h1>
+            <h1>{t("Orders")}</h1>
             {loading
                 ? (<Loader />)
                 : error
@@ -39,12 +40,12 @@ function OrderListScreen({ history }) {
                         <Table striped bordered hover responsive className='table-sm'>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>USER</th>
-                                    <th>DATE</th>
-                                    <th>Total</th>
-                                    <th>PAID</th>
-                                    <th>DELIVERED</th>
+                                    <th>{t("ID")}</th>
+                                    <th>{t("USER")}</th>
+                                    <th>{t("DATE")}</th>
+                                    <th>{t("Total")}</th>
+                                    <th>{t("PAID")}</th>
+                                    <th>{t("DELIVERED")}</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -74,7 +75,7 @@ function OrderListScreen({ history }) {
                                         <td>
                                             <LinkContainer to={`/order/${order._id}`}>
                                                 <Button variant='light' className='btn-sm'>
-                                                    Details
+                                                    {t("Details")}
                                                 </Button>
                                             </LinkContainer>
 
@@ -89,4 +90,4 @@ function OrderListScreen({ history }) {
     )
 }
 
-export default OrderListScreen
+export default withTranslation('translations')(OrderListScreen)

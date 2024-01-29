@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listUsers, deleteUser } from '../actions/userActions'
+import { withTranslation } from 'react-i18next';
 
-function UserListScreen({ history }) {
+function UserListScreen({ history, t }) {
 
     const dispatch = useDispatch()
 
@@ -32,14 +33,14 @@ function UserListScreen({ history }) {
 
     const deleteHandler = (id) => {
 
-        if (window.confirm('Are you sure you want to delete this user?')) {
+        if (window.confirm(t('Are you sure you want to delete this user?'))) {
             dispatch(deleteUser(id))
         }
     }
 
     return (
         <div>
-            <h1>Users</h1>
+            <h1>{t("Users")}</h1>
             {loading
                 ? (<Loader />)
                 : error
@@ -48,10 +49,10 @@ function UserListScreen({ history }) {
                         <Table striped bordered hover responsive className='table-sm'>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>NAME</th>
-                                    <th>EMAIL</th>
-                                    <th>ADMIN</th>
+                                    <th>{t("ID")}</th>
+                                    <th>{t("NAME")}</th>
+                                    <th>{t("EMAIL")}</th>
+                                    <th>{t("ADMIN")}</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -88,4 +89,4 @@ function UserListScreen({ history }) {
     )
 }
 
-export default UserListScreen
+export default withTranslation('translations')(UserListScreen)

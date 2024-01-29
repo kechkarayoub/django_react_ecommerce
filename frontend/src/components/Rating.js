@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next';
 
 function Rating({ value, text, color }) {
     return (
@@ -68,4 +69,4 @@ function Rating({ value, text, color }) {
     )
 }
 
-export default Rating
+export default withTranslation('translations')(Rating)

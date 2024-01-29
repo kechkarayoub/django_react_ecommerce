@@ -4,9 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
+import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
-function CartScreen({ match, location, history }) {
+function CartScreen({ match, location, history, t }) {
+    const current_language = get("current_language");
     const productId = match.params.id
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
     const dispatch = useDispatch()
@@ -32,10 +35,12 @@ function CartScreen({ match, location, history }) {
     return (
         <Row>
             <Col md={8}>
-                <h1>Shopping Cart</h1>
+                <h1>{t("Shopping Cart")}</h1>
                 {cartItems.length === 0 ? (
                     <Message variant='info'>
-                        Your cart is empty <Link to='/'>Go Back</Link>
+                            <>
+                                {t("Your cart is empty")} <Link to='/'>{t("Go Back")}</Link>
+                            </>
                     </Message>
                 ) : (
                         <ListGroup variant='flush'>
@@ -91,7 +96,7 @@ function CartScreen({ match, location, history }) {
                 <Card>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
+                                <h2>{t("Subtotal")} ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) {t(cartItems.reduce((acc, item) => acc + item.qty, 0) > 1 ? "items" : "item")}</h2>
                             ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                         </ListGroup.Item>
                     </ListGroup>
@@ -103,7 +108,7 @@ function CartScreen({ match, location, history }) {
                             disabled={cartItems.length === 0}
                             onClick={checkoutHandler}
                         >
-                            Proceed To Checkout
+                            {t("Proceed To Checkout")}
                         </Button>
                     </ListGroup.Item>
 
@@ -114,4 +119,4 @@ function CartScreen({ match, location, history }) {
     )
 }
 
-export default CartScreen
+export default withTranslation('translations')(CartScreen)

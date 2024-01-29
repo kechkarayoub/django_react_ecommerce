@@ -1,52 +1,53 @@
 import React from 'react'
 import { Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { withTranslation } from 'react-i18next';
 
-function CheckoutSteps({ step1, step2, step3, step4 }) {
+function CheckoutSteps({ step1, step2, step3, step4, t }) {
 
     return (
         <Nav className='justify-content-center mb-4'>
             <Nav.Item>
                 {step1 ? (
                     <LinkContainer to='/login'>
-                        <Nav.Link>Login</Nav.Link>
+                        <Nav.Link>{t("Login")}</Nav.Link>
                     </LinkContainer>
                 ) : (
-                        <Nav.Link disabled>Login</Nav.Link>
+                        <Nav.Link disabled>{t("Login")}</Nav.Link>
                     )}
             </Nav.Item>
 
             <Nav.Item>
                 {step2 ? (
                     <LinkContainer to='/shipping'>
-                        <Nav.Link>Shipping</Nav.Link>
+                        <Nav.Link>{t("Shipping")}</Nav.Link>
                     </LinkContainer>
                 ) : (
-                        <Nav.Link disabled>Shipping</Nav.Link>
+                        <Nav.Link disabled>{t("Shipping")}</Nav.Link>
                     )}
             </Nav.Item>
 
             <Nav.Item>
                 {step3 ? (
                     <LinkContainer to='/payment'>
-                        <Nav.Link>Payment</Nav.Link>
+                        <Nav.Link>{t("Payment")}</Nav.Link>
                     </LinkContainer>
                 ) : (
-                        <Nav.Link disabled>Payment</Nav.Link>
+                        <Nav.Link disabled>{t("Payment")}</Nav.Link>
                     )}
             </Nav.Item>
 
             <Nav.Item>
                 {step4 ? (
                     <LinkContainer to='/placeorder'>
-                        <Nav.Link>Place Order</Nav.Link>
+                        <Nav.Link>{t("Place Order")}</Nav.Link>
                     </LinkContainer>
                 ) : (
-                        <Nav.Link disabled>Place Order</Nav.Link>
+                        <Nav.Link disabled>{t("Place Order")}</Nav.Link>
                     )}
             </Nav.Item>
         </Nav>
     )
 }
 
-export default CheckoutSteps
+export default withTranslation('translations')(CheckoutSteps)

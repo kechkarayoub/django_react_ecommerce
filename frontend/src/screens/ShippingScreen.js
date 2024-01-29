@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { saveShippingAddress } from '../actions/cartActions'
+import { withTranslation } from 'react-i18next';
 
-function ShippingScreen({ history }) {
+function ShippingScreen({ history, t }) {
 
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart
@@ -26,15 +27,15 @@ function ShippingScreen({ history }) {
     return (
         <FormContainer>
             <CheckoutSteps step1 step2 />
-            <h1>Shipping</h1>
+            <h1>{t("Shipping")}</h1>
             <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='address'>
-                    <Form.Label>Address</Form.Label>
+                    <Form.Label>{t("Address")}</Form.Label>
                     <Form.Control
                         required
                         type='text'
-                        placeholder='Enter address'
+                        placeholder={t('Enter address')}
                         value={address ? address : ''}
                         onChange={(e) => setAddress(e.target.value)}
                     >
@@ -42,11 +43,11 @@ function ShippingScreen({ history }) {
                 </Form.Group>
 
                 <Form.Group controlId='city'>
-                    <Form.Label>City</Form.Label>
+                    <Form.Label>{t("City")}</Form.Label>
                     <Form.Control
                         required
                         type='text'
-                        placeholder='Enter city'
+                        placeholder={t('Enter city')}
                         value={city ? city : ''}
                         onChange={(e) => setCity(e.target.value)}
                     >
@@ -54,11 +55,11 @@ function ShippingScreen({ history }) {
                 </Form.Group>
 
                 <Form.Group controlId='postalCode'>
-                    <Form.Label>Postal Code</Form.Label>
+                    <Form.Label>{t("Postal Code")}</Form.Label>
                     <Form.Control
                         required
                         type='text'
-                        placeholder='Enter postal code'
+                        placeholder={t('Enter postal code')}
                         value={postalCode ? postalCode : ''}
                         onChange={(e) => setPostalCode(e.target.value)}
                     >
@@ -66,11 +67,11 @@ function ShippingScreen({ history }) {
                 </Form.Group>
 
                 <Form.Group controlId='country'>
-                    <Form.Label>Country</Form.Label>
+                    <Form.Label>{t("Country")}</Form.Label>
                     <Form.Control
                         required
                         type='text'
-                        placeholder='Enter country'
+                        placeholder={t('Enter country')}
                         value={country ? country : ''}
                         onChange={(e) => setCountry(e.target.value)}
                     >
@@ -78,11 +79,11 @@ function ShippingScreen({ history }) {
                 </Form.Group>
 
                 <Button type='submit' variant='primary'>
-                    Continue
+                    {t("Continue")}
                 </Button>
             </Form>
         </FormContainer>
     )
 }
 
-export default ShippingScreen
+export default withTranslation('translations')(ShippingScreen)

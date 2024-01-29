@@ -8,9 +8,10 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
+import { withTranslation } from 'react-i18next';
 
 
-function ProductEditScreen({ match, history }) {
+function ProductEditScreen({ match, history, t }) {
 
     const productId = match.params.id
 
@@ -102,11 +103,11 @@ function ProductEditScreen({ match, history }) {
     return (
         <div>
             <Link to='/admin/productlist'>
-                Go Back
+                {t("Go Back")}
             </Link>
 
             <FormContainer>
-                <h1>Edit Product</h1>
+                <h1>{t("Edit Product")}</h1>
                 {loadingUpdate && <Loader />}
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 
@@ -115,7 +116,7 @@ function ProductEditScreen({ match, history }) {
                         <Form onSubmit={submitHandler}>
 
                             <Form.Group controlId='name'>
-                                <Form.Label>Name</Form.Label>
+                                <Form.Label>{t("Name")}</Form.Label>
                                 <Form.Control
 
                                     type='name'
@@ -127,7 +128,7 @@ function ProductEditScreen({ match, history }) {
                             </Form.Group>
 
                             <Form.Group controlId='price'>
-                                <Form.Label>Price</Form.Label>
+                                <Form.Label>{t("Price")}</Form.Label>
                                 <Form.Control
 
                                     type='number'
@@ -140,7 +141,7 @@ function ProductEditScreen({ match, history }) {
 
 
                             <Form.Group controlId='image'>
-                                <Form.Label>Image</Form.Label>
+                                <Form.Label>{t("Image")}</Form.Label>
                                 <Form.Control
 
                                     type='text'
@@ -164,7 +165,7 @@ function ProductEditScreen({ match, history }) {
 
 
                             <Form.Group controlId='brand'>
-                                <Form.Label>Brand</Form.Label>
+                                <Form.Label>{t("Brand")}</Form.Label>
                                 <Form.Control
 
                                     type='text'
@@ -176,7 +177,7 @@ function ProductEditScreen({ match, history }) {
                             </Form.Group>
 
                             <Form.Group controlId='countinstock'>
-                                <Form.Label>Stock</Form.Label>
+                                <Form.Label>{t("Stock")}</Form.Label>
                                 <Form.Control
 
                                     type='number'
@@ -188,7 +189,7 @@ function ProductEditScreen({ match, history }) {
                             </Form.Group>
 
                             <Form.Group controlId='category'>
-                                <Form.Label>Category</Form.Label>
+                                <Form.Label>{t("Category")}</Form.Label>
                                 <Form.Control
 
                                     type='text'
@@ -200,7 +201,7 @@ function ProductEditScreen({ match, history }) {
                             </Form.Group>
 
                             <Form.Group controlId='description'>
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>{t("Description")}</Form.Label>
                                 <Form.Control
 
                                     type='text'
@@ -213,7 +214,7 @@ function ProductEditScreen({ match, history }) {
 
 
                             <Button type='submit' variant='primary'>
-                                Update
+                                {t("Update")}
                         </Button>
 
                         </Form>
@@ -225,4 +226,4 @@ function ProductEditScreen({ match, history }) {
     )
 }
 
-export default ProductEditScreen
+export default withTranslation('translations')(ProductEditScreen)

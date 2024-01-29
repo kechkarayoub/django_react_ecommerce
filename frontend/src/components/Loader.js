@@ -1,7 +1,8 @@
 import React from 'react'
 import { Spinner } from 'react-bootstrap'
+import { withTranslation } from 'react-i18next';
 
-function Loader() {
+function Loader({t}) {
     return (
         <Spinner
             animation='border'
@@ -13,9 +14,9 @@ function Loader() {
                 display: 'block'
             }}
         >
-            <span className='sr-only'>Loading...</span>
+            <span className='sr-only'>{t("Loading...")}</span>
         </Spinner>
     )
 }
 
-export default Loader
+export default withTranslation('translations')(Loader)

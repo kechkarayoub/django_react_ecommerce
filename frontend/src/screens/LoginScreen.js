@@ -6,8 +6,10 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
+import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
-function LoginScreen({ location, history }) {
+function LoginScreen({ location, history, t }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -29,18 +31,19 @@ function LoginScreen({ location, history }) {
         dispatch(login(email, password))
     }
 
+    const current_language = get("current_language");
     return (
         <FormContainer>
-            <h1>Sign In</h1>
+            <h1>{t("Sign In")}</h1>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='email'>
-                    <Form.Label>Email Address</Form.Label>
+                    <Form.Label>{t("Email Address")}</Form.Label>
                     <Form.Control
                         type='email'
-                        placeholder='Enter Email'
+                        placeholder={t('Enter Email')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     >
@@ -49,10 +52,10 @@ function LoginScreen({ location, history }) {
 
 
                 <Form.Group controlId='password'>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>{t("Password")}</Form.Label>
                     <Form.Control
                         type='password'
-                        placeholder='Enter Password'
+                        placeholder={t('Enter Password')}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     >
@@ -60,21 +63,21 @@ function LoginScreen({ location, history }) {
                 </Form.Group>
 
                 <Button type='submit' variant='primary'>
-                    Sign In
+                    {t("Sign In")}
                 </Button>
             </Form>
 
             <Row className='py-3'>
-                <Col>
-                    New Customer? <Link
-                        to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-                        Register
-                        </Link>
-                </Col>
+                    <Col>
+                        {t("New Customer?")} <Link
+                            to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+                            {t("Register")}
+                            </Link>
+                    </Col>
             </Row>
 
         </FormContainer>
     )
 }
 
-export default LoginScreen
+export default withTranslation('translations')(LoginScreen)

@@ -4,8 +4,10 @@ import { Navbar, Nav, Container, Row, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
+import { withTranslation } from 'react-i18next';
+import {get_site_infos} from "../utils";
 
-function Header() {
+function Header({t}) {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -21,7 +23,7 @@ function Header() {
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
                 <Container>
                     <LinkContainer to='/'>
-                        <Navbar.Brand>ProShop</Navbar.Brand>
+                        <Navbar.Brand>{get_site_infos().site_name}</Navbar.Brand>
                     </LinkContainer>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,21 +32,21 @@ function Header() {
                         <Nav className="ml-auto">
 
                             <LinkContainer to='/cart'>
-                                <Nav.Link ><i className="fas fa-shopping-cart"></i>Cart</Nav.Link>
+                                <Nav.Link ><i className="fas fa-shopping-cart"></i>{t("Cart")}</Nav.Link>
                             </LinkContainer>
 
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
                                     <LinkContainer to='/profile'>
-                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                        <NavDropdown.Item>{t("Profile")}</NavDropdown.Item>
                                     </LinkContainer>
 
-                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={logoutHandler}>{t("Logout")}</NavDropdown.Item>
 
                                 </NavDropdown>
                             ) : (
                                     <LinkContainer to='/login'>
-                                        <Nav.Link><i className="fas fa-user"></i>Login</Nav.Link>
+                                        <Nav.Link><i className="fas fa-user"></i>{t("Login")}</Nav.Link>
                                     </LinkContainer>
                                 )}
 
@@ -52,15 +54,15 @@ function Header() {
                             {userInfo && userInfo.isAdmin && (
                                 <NavDropdown title='Admin' id='adminmenue'>
                                     <LinkContainer to='/admin/userlist'>
-                                        <NavDropdown.Item>Users</NavDropdown.Item>
+                                        <NavDropdown.Item>{t("Users")}</NavDropdown.Item>
                                     </LinkContainer>
 
                                     <LinkContainer to='/admin/productlist'>
-                                        <NavDropdown.Item>Products</NavDropdown.Item>
+                                        <NavDropdown.Item>{t("Products")}</NavDropdown.Item>
                                     </LinkContainer>
 
                                     <LinkContainer to='/admin/orderlist'>
-                                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                                        <NavDropdown.Item>{t("Orders")}</NavDropdown.Item>
                                     </LinkContainer>
 
                                 </NavDropdown>
@@ -75,4 +77,4 @@ function Header() {
     )
 }
 
-export default Header
+export default withTranslation('translations')(Header)

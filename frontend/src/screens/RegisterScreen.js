@@ -6,8 +6,9 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
+import { withTranslation } from 'react-i18next';
 
-function RegisterScreen({ location, history }) {
+function RegisterScreen({ location, history, t }) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -32,7 +33,7 @@ function RegisterScreen({ location, history }) {
         e.preventDefault()
 
         if (password != confirmPassword) {
-            setMessage('Passwords do not match')
+            setMessage(t('Passwords do not match'))
         } else {
             dispatch(register(name, email, password))
         }
@@ -48,11 +49,11 @@ function RegisterScreen({ location, history }) {
             <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='name'>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label>{t("Name")}</Form.Label>
                     <Form.Control
                         required
                         type='name'
-                        placeholder='Enter name'
+                        placeholder={t('Enter name')}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     >
@@ -60,11 +61,11 @@ function RegisterScreen({ location, history }) {
                 </Form.Group>
 
                 <Form.Group controlId='email'>
-                    <Form.Label>Email Address</Form.Label>
+                    <Form.Label>{t("Email Address")}</Form.Label>
                     <Form.Control
                         required
                         type='email'
-                        placeholder='Enter Email'
+                        placeholder={t('Enter Email')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     >
@@ -72,11 +73,11 @@ function RegisterScreen({ location, history }) {
                 </Form.Group>
 
                 <Form.Group controlId='password'>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>{t("Password")}</Form.Label>
                     <Form.Control
                         required
                         type='password'
-                        placeholder='Enter Password'
+                        placeholder={t('Enter Password')}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     >
@@ -84,11 +85,11 @@ function RegisterScreen({ location, history }) {
                 </Form.Group>
 
                 <Form.Group controlId='passwordConfirm'>
-                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Label>{t("Confirm Password")}</Form.Label>
                     <Form.Control
                         required
                         type='password'
-                        placeholder='Confirm Password'
+                        placeholder={t('Confirm Password')}
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     >
@@ -96,16 +97,16 @@ function RegisterScreen({ location, history }) {
                 </Form.Group>
 
                 <Button type='submit' variant='primary'>
-                    Register
+                    {t("Register")}
                 </Button>
 
             </Form>
 
             <Row className='py-3'>
                 <Col>
-                    Have an Account? <Link
+                    {t("Have an Account?")} <Link
                         to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-                        Sign In
+                        {t("Sign In")}
                         </Link>
                 </Col>
             </Row>
@@ -113,4 +114,4 @@ function RegisterScreen({ location, history }) {
     )
 }
 
-export default RegisterScreen
+export default withTranslation('translations')(RegisterScreen)

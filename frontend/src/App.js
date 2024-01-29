@@ -17,6 +17,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import { withTranslation, Trans } from "react-i18next";
 
 
 function App() {
@@ -50,4 +51,4 @@ function App() {
   );
 }
 
-export default App;
+export default withTranslation("translations")(App);

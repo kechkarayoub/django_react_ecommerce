@@ -7,8 +7,9 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { getUserDetails, updateUser } from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
+import { withTranslation } from 'react-i18next';
 
-function UserEditScreen({ match, history }) {
+function UserEditScreen({ match, history, t }) {
 
     const userId = match.params.id
 
@@ -50,11 +51,11 @@ function UserEditScreen({ match, history }) {
     return (
         <div>
             <Link to='/admin/userlist'>
-                Go Back
+                {t("Go Back")}
             </Link>
 
             <FormContainer>
-                <h1>Edit User</h1>
+                <h1>{t("Edit User")}</h1>
                 {loadingUpdate && <Loader />}
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 
@@ -63,11 +64,11 @@ function UserEditScreen({ match, history }) {
                         <Form onSubmit={submitHandler}>
 
                             <Form.Group controlId='name'>
-                                <Form.Label>Name</Form.Label>
+                                <Form.Label>{t("Name")}</Form.Label>
                                 <Form.Control
 
                                     type='name'
-                                    placeholder='Enter name'
+                                    placeholder={t('Enter name')}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 >
@@ -75,10 +76,10 @@ function UserEditScreen({ match, history }) {
                             </Form.Group>
 
                             <Form.Group controlId='email'>
-                                <Form.Label>Email Address</Form.Label>
+                                <Form.Label>{t("Email Address")}</Form.Label>
                                 <Form.Control
                                     type='email'
-                                    placeholder='Enter Email'
+                                    placeholder={t('Enter Email')}
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 >
@@ -88,7 +89,7 @@ function UserEditScreen({ match, history }) {
                             <Form.Group controlId='isadmin'>
                                 <Form.Check
                                     type='checkbox'
-                                    label='Is Admin'
+                                    label={t('Is Admin')}
                                     checked={isAdmin}
                                     onChange={(e) => setIsAdmin(e.target.checked)}
                                 >
@@ -96,7 +97,7 @@ function UserEditScreen({ match, history }) {
                             </Form.Group>
 
                             <Button type='submit' variant='primary'>
-                                Update
+                                {t("Update")}
                         </Button>
 
                         </Form>
@@ -108,4 +109,4 @@ function UserEditScreen({ match, history }) {
     )
 }
 
-export default UserEditScreen
+export default withTranslation('translations')(UserEditScreen)

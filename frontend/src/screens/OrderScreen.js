@@ -7,9 +7,10 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
+import { withTranslation } from 'react-i18next';
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
-function OrderScreen({ match, history }) {
+function OrderScreen({ match, history, t }) {
     const orderId = match.params.id
     const dispatch = useDispatch()
 
@@ -80,16 +81,16 @@ function OrderScreen({ match, history }) {
         <Message variant='danger'>{error}</Message>
     ) : (
                 <div>
-                    <h1>Order: {order.Id}</h1>
+                    <h1>{t("Order")}: {order.Id}</h1>
                     <Row>
                         <Col md={8}>
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
-                                    <h2>Shipping</h2>
-                                    <p><strong>Name: </strong> {order.user.name}</p>
-                                    <p><strong>Email: </strong><a href={`mailto:${order.user.email}`}>{order.user.email}</a></p>
+                                    <h2>{t("Shipping")}</h2>
+                                    <p><strong>{t("Name")}: </strong> {order.user.name}</p>
+                                    <p><strong>{t("Email")}: </strong><a href={`mailto:${order.user.email}`}>{order.user.email}</a></p>
                                     <p>
-                                        <strong>Shipping: </strong>
+                                        <strong>{t("Shipping")}: </strong>
                                         {order.shippingAddress.address},  {order.shippingAddress.city}
                                         {'  '}
                                         {order.shippingAddress.postalCode},
@@ -98,51 +99,53 @@ function OrderScreen({ match, history }) {
                                     </p>
 
                                     {order.isDelivered ? (
-                                        <Message variant='success'>Delivered on {order.deliveredAt}</Message>
+                                        <Message variant='success'>{t("Delivered on")} {order.deliveredAt}</Message>
                                     ) : (
-                                            <Message variant='warning'>Not Delivered</Message>
+                                            <Message variant='warning'>{t("Not Delivered")}</Message>
                                         )}
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
-                                    <h2>Payment Method</h2>
+                                    <h2>{t("Payment Method")}</h2>
                                     <p>
-                                        <strong>Method: </strong>
+                                        <strong>{t("Method")}: </strong>
                                         {order.paymentMethod}
                                     </p>
                                     {order.isPaid ? (
-                                        <Message variant='success'>Paid on {order.paidAt}</Message>
+                                        <Message variant='success'>{t("Paid on")} {order.paidAt}</Message>
                                     ) : (
-                                            <Message variant='warning'>Not Paid</Message>
+                                            <Message variant='warning'>{t("Not Paid")}</Message>
                                         )}
 
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
-                                    <h2>Order Items</h2>
-                                    {order.orderItems.length === 0 ? <Message variant='info'>
-                                        Order is empty
-                            </Message> : (
-                                            <ListGroup variant='flush'>
-                                                {order.orderItems.map((item, index) => (
-                                                    <ListGroup.Item key={index}>
-                                                        <Row>
-                                                            <Col md={1}>
-                                                                <Image src={BACKEND_URL + item.image} alt={item.name} fluid rounded />
-                                                            </Col>
+                                    <h2>{t("Order Items")}</h2>
+                                    {order.orderItems.length === 0 ? 
+                                        <Message variant='info'>
+                                        {t("Order is empty")}
+                                        </Message> 
+                                    : (
+                                        <ListGroup variant='flush'>
+                                            {order.orderItems.map((item, index) => (
+                                                <ListGroup.Item key={index}>
+                                                    <Row>
+                                                        <Col md={1}>
+                                                            <Image src={BACKEND_URL + item.image} alt={item.name} fluid rounded />
+                                                        </Col>
 
-                                                            <Col>
-                                                                <Link to={`/product/${item.product}`}>{item.name}</Link>
-                                                            </Col>
+                                                        <Col>
+                                                            <Link to={`/product/${item.product}`}>{item.name}</Link>
+                                                        </Col>
 
-                                                            <Col md={4}>
-                                                                {item.qty} X ${item.price} = ${(item.qty * item.price).toFixed(2)}
-                                                            </Col>
-                                                        </Row>
-                                                    </ListGroup.Item>
-                                                ))}
-                                            </ListGroup>
-                                        )}
+                                                        <Col md={4}>
+                                                            {item.qty} X ${item.price} = ${(item.qty * item.price).toFixed(2)}
+                                                        </Col>
+                                                    </Row>
+                                                </ListGroup.Item>
+                                            ))}
+                                        </ListGroup>
+                                    )}
                                 </ListGroup.Item>
 
                             </ListGroup>
@@ -153,33 +156,33 @@ function OrderScreen({ match, history }) {
                             <Card>
                                 <ListGroup variant='flush'>
                                     <ListGroup.Item>
-                                        <h2>Order Summary</h2>
+                                        <h2>{t("Order Summary")}</h2>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>Items:</Col>
+                                            <Col>{t("Items")}:</Col>
                                             <Col>${order.itemsPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>Shipping:</Col>
+                                            <Col>{t("Shipping")}:</Col>
                                             <Col>${order.shippingPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>Tax:</Col>
+                                            <Col>{t("Tax")}:</Col>
                                             <Col>${order.taxPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>Total:</Col>
+                                            <Col>{t("Total")}:</Col>
                                             <Col>${order.totalPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -208,7 +211,7 @@ function OrderScreen({ match, history }) {
                                             className='btn btn-block'
                                             onClick={deliverHandler}
                                         >
-                                            Mark As Delivered
+                                            {t("Mark As Delivered")}
                                         </Button>
                                     </ListGroup.Item>
                                 )}
@@ -219,4 +222,4 @@ function OrderScreen({ match, history }) {
             )
 }
 
-export default OrderScreen
+export default withTranslation('translations')(OrderScreen)
