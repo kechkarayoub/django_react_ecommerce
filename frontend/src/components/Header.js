@@ -6,6 +6,8 @@ import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
 import { withTranslation } from 'react-i18next';
 import {get_site_infos} from "../utils";
+import {ACTIVATE_TRANSLATONS} from "../app_config";
+import LanguageSelect from "./LanguageSelect"; 
 
 function Header({t}) {
 
@@ -67,6 +69,10 @@ function Header({t}) {
 
                                 </NavDropdown>
                             )}
+                            
+                            {ACTIVATE_TRANSLATONS &&
+                                <LanguageSelect />
+                            }
 
 
                         </Nav>

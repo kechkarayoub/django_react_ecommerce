@@ -24,6 +24,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "store": "^2.0.12",
+    "styled-components": "^6.1.8",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
