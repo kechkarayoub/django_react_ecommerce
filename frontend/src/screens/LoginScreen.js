@@ -33,7 +33,7 @@ function LoginScreen({ location, history, t }) {
 
     const current_language = get("current_language");
     return (
-        <FormContainer>
+        <FormContainer class_name={"custom_form_container " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <h1>{t("Sign In")}</h1>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}

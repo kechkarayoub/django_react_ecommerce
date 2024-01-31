@@ -78,7 +78,7 @@ const LanguageSelectStyle = styled.div`
     >img{
         height: 12px;
         margin: 0 5px;
-        margin-bottom: 5px;
+        margin-bottom: 0px;
         max-height: 12px;
         width: 16px;
     }

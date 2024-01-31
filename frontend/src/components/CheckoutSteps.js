@@ -2,11 +2,12 @@ import React from 'react'
 import { Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function CheckoutSteps({ step1, step2, step3, step4, t }) {
-
+    const current_language = get("current_language");
     return (
-        <Nav className='justify-content-center mb-4'>
+        <Nav className={'justify-content-center mb-4 ' + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Nav.Item>
                 {step1 ? (
                     <LinkContainer to='/login'>

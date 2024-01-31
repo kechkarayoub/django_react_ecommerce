@@ -8,6 +8,8 @@ import Loader from '../components/Loader'
 import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
+
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function OrderScreen({ match, history, t }) {
@@ -74,13 +76,14 @@ function OrderScreen({ match, history, t }) {
     const deliverHandler = () => {
         dispatch(deliverOrder(order))
     }
+    const current_language = get("current_language");
 
     return loading ? (
         <Loader />
     ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant='danger' class_name={"custom_message " + (current_language == "ar" ? 'rtl' : 'ltr')}>{error}</Message>
     ) : (
-                <div>
+                <div className={"order_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
                     <h1>{t("Order")}: {order.Id}</h1>
                     <Row>
                         <Col md={8}>

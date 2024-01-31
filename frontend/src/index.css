@@ -53,3 +53,45 @@ h3{
   }
 }
 
+footer .footer_content span{
+  margin: 0 3px;
+}
+footer.rtl .footer_content{
+  justify-content: center;
+    display: flex;
+    flex-direction: row-reverse;
+}
+header.rtl nav .container{
+  flex-direction: row-reverse;
+}
+header.rtl nav .container .navbar-brand {
+  margin-left: 2rem;
+  margin-right: unset;
+}
+header.rtl nav .container .navbar-collapse{
+  flex-direction: row-reverse;
+}
+header.rtl nav .container .navbar-collapse form{
+  flex-direction: row-reverse;
+}
+header.rtl nav .container .navbar-collapse form input{
+}
+header.rtl nav .container .navbar-collapse .navbar-nav{
+  flex-direction: row-reverse;
+}
+.custom_form_container.rtl h1{
+  text-align: right;
+}
+.custom_form_container.rtl form > button{
+  float: right;
+}
+.custom_form_container.rtl form .form-group{
+  text-align: right;
+}
+.custom_form_container.rtl form .form-group input{
+  direction: rtl;
+}
+.nav.rtl{
+  flex-direction: row-reverse;
+}
+

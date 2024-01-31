@@ -8,6 +8,7 @@ import { withTranslation } from 'react-i18next';
 import {get_site_infos} from "../utils";
 import {ACTIVATE_TRANSLATONS} from "../app_config";
 import LanguageSelect from "./LanguageSelect"; 
+import {get} from "../storage";
 
 function Header({t}) {
 
@@ -20,8 +21,9 @@ function Header({t}) {
         dispatch(logout())
     }
 
+    const current_language = get("current_language");
     return (
-        <header>
+        <header className={current_language == "ar" ? 'rtl' : 'ltr'}>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
                 <Container>
                     <LinkContainer to='/'>
@@ -31,7 +33,7 @@ function Header({t}) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <SearchBox />
-                        <Nav className="ml-auto">
+                        <Nav className={current_language == "ar" ? 'mr-auto' : 'ml-auto'}>
 
                             <LinkContainer to='/cart'>
                                 <Nav.Link ><i className="fas fa-shopping-cart"></i>{t("Cart")}</Nav.Link>

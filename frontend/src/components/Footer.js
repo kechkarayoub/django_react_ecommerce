@@ -8,10 +8,16 @@ import {get} from "../storage";
 function Footer({t}) {
     const current_language = get("current_language");
     return (
-        <footer>
+        <footer className={current_language == "ar" ? 'rtl' : 'ltr'}>
             <Container>
                 <Row>
-                    <Col className="text-center py-3">{t("Copyright")} &copy; {moment().format("YYYY")} {get_site_infos().site_name}</Col>
+                    <Col className="text-center py-3 footer_content">
+                        <span>{t("Copyright")}</span>
+                        <span> &copy; </span>
+                        <span>{t("All rights reserved")}</span>
+                        <span>{moment().format("YYYY")}</span>
+                        <span>{get_site_infos().site_name}</span>
+                    </Col>
                 </Row>
             </Container>
         </footer>

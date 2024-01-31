@@ -33,7 +33,7 @@ function CartScreen({ match, location, history, t }) {
     }
 
     return (
-        <Row>
+        <Row className={"cart_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Col md={8}>
                 <h1>{t("Shopping Cart")}</h1>
                 {cartItems.length === 0 ? (

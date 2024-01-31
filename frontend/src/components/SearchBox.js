@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function SearchBox({t}) {
     const [keyword, setKeyword] = useState('')
@@ -16,13 +17,14 @@ function SearchBox({t}) {
             history.push(history.push(history.location.pathname))
         }
     }
+    const current_language = get("current_language");
     return (
         <Form onSubmit={submitHandler} inline>
             <Form.Control
                 type='text'
                 name='q'
                 onChange={(e) => setKeyword(e.target.value)}
-                className='mr-sm-2 ml-sm-5'
+                className={current_language == "ar" ? 'ml-sm-2 mr-sm-5' : 'mr-sm-2 ml-sm-5'}
             ></Form.Control>
 
             <Button

@@ -9,6 +9,7 @@ import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 import { listMyOrders } from '../actions/orderActions'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function ProfileScreen({ history, t }) {
 
@@ -64,8 +65,9 @@ function ProfileScreen({ history, t }) {
         }
 
     }
+    const current_language = get("current_language");
     return (
-        <Row>
+        <Row className={"user_profile "  + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Col md={3}>
                 <h2>{t("User Profile")}</h2>
 

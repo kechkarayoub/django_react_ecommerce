@@ -5,6 +5,7 @@ import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { saveShippingAddress } from '../actions/cartActions'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function ShippingScreen({ history, t }) {
 
@@ -24,8 +25,9 @@ function ShippingScreen({ history, t }) {
         history.push('/payment')
     }
 
+    const current_language = get("current_language");
     return (
-        <FormContainer>
+        <FormContainer class_name={"custom_form_container shipping_form " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <CheckoutSteps step1 step2 />
             <h1>{t("Shipping")}</h1>
             <Form onSubmit={submitHandler}>

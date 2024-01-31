@@ -9,6 +9,7 @@ import FormContainer from '../components/FormContainer'
 import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 
 function ProductEditScreen({ match, history, t }) {
@@ -100,8 +101,9 @@ function ProductEditScreen({ match, history, t }) {
         }
     }
 
+    const current_language = get("current_language");
     return (
-        <div>
+        <div className={"product_edit_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Link to='/admin/productlist'>
                 {t("Go Back")}
             </Link>

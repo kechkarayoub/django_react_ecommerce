@@ -6,6 +6,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listOrders } from '../actions/orderActions'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function OrderListScreen({ history, t }) {
 
@@ -28,9 +29,10 @@ function OrderListScreen({ history, t }) {
 
     }, [dispatch, history, userInfo])
 
+    const current_language = get("current_language");
 
     return (
-        <div>
+        <div className={"order_list_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <h1>{t("Orders")}</h1>
             {loading
                 ? (<Loader />)

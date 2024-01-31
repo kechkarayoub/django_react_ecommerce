@@ -7,6 +7,8 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
+
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function PlaceOrderScreen({ history, t }) {
@@ -48,8 +50,9 @@ function PlaceOrderScreen({ history, t }) {
         }))
     }
 
+    const current_language = get("current_language");
     return (
-        <div>
+        <div className={"place_order_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <CheckoutSteps step1 step2 step3 step4 />
             <Row>
                 <Col md={8}>

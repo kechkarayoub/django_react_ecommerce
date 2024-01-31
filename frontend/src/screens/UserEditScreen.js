@@ -8,6 +8,7 @@ import FormContainer from '../components/FormContainer'
 import { getUserDetails, updateUser } from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function UserEditScreen({ match, history, t }) {
 
@@ -48,8 +49,9 @@ function UserEditScreen({ match, history, t }) {
         dispatch(updateUser({ _id: user._id, name, email, isAdmin }))
     }
 
+    const current_language = get("current_language");
     return (
-        <div>
+        <div className={"user_edit_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Link to='/admin/userlist'>
                 {t("Go Back")}
             </Link>

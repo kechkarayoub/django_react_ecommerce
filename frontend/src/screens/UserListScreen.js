@@ -6,6 +6,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listUsers, deleteUser } from '../actions/userActions'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function UserListScreen({ history, t }) {
 
@@ -38,8 +39,9 @@ function UserListScreen({ history, t }) {
         }
     }
 
+    const current_language = get("current_language");
     return (
-        <div>
+        <div className={"user_list_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <h1>{t("Users")}</h1>
             {loading
                 ? (<Loader />)

@@ -8,6 +8,7 @@ import Paginate from '../components/Paginate'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function ProductListScreen({ history, match, t }) {
 
@@ -54,8 +55,9 @@ function ProductListScreen({ history, match, t }) {
         dispatch(createProduct())
     }
 
+    const current_language = get("current_language");
     return (
-        <div>
+        <div className={"products_list_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Row className='align-items-center'>
                 <Col>
                     <h1>{t("Products")}</h1>

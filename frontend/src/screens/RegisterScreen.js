@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function RegisterScreen({ location, history, t }) {
 
@@ -39,9 +40,10 @@ function RegisterScreen({ location, history, t }) {
         }
 
     }
+    const current_language = get("current_language");
 
     return (
-        <FormContainer>
+        <FormContainer class_name={"custom_form_container sign_in_form " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <h1>Sign In</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}

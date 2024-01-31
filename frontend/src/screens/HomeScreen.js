@@ -8,6 +8,7 @@ import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
 import { listProducts } from '../actions/productActions'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 
 function HomeScreen({ history, t }) {
@@ -22,8 +23,10 @@ function HomeScreen({ history, t }) {
 
     }, [dispatch, keyword])
 
+    const current_language = get("current_language");
+
     return (
-        <div>
+        <div className={"home_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             {!keyword && <ProductCarousel />}
 
             <h1>{t('Latest products')}</h1>

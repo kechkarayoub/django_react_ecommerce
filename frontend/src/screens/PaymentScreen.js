@@ -5,6 +5,7 @@ import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { savePaymentMethod } from '../actions/cartActions'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function PaymentScreen({ history, t }) {
 
@@ -24,9 +25,10 @@ function PaymentScreen({ history, t }) {
         dispatch(savePaymentMethod(paymentMethod))
         history.push('/placeorder')
     }
+    const current_language = get("current_language");
 
     return (
-        <FormContainer>
+        <FormContainer class_name={"custom_form_container payment_form " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <CheckoutSteps step1 step2 step3 />
 
             <Form onSubmit={submitHandler}>

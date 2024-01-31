@@ -8,6 +8,8 @@ import Message from '../components/Message'
 import { listProductDetails, createProductReview } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
+
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function ProductScreen({ match, history, t }) {
@@ -55,8 +57,9 @@ function ProductScreen({ match, history, t }) {
         ))
     }
 
+    const current_language = get("current_language");
     return (
-        <div>
+        <div className={"product_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Link to='/' className='btn btn-light my-3'>{t("Go Back")}</Link>
             {loading ?
                 <Loader />
