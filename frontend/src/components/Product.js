@@ -30,8 +30,8 @@ function Product({ product, t }) {
                 </Card.Text>
 
 
-                <Card.Text as="h3">
-                    {product.price}{t(get_currency())}
+                <Card.Text as="h3"  style={current_language == "ar" ? {display: "flex"} : {}}>
+                    <span>{product.price}</span><span>{t(get_currency())}</span>
                 </Card.Text>
             </Card.Body>
         </Card>

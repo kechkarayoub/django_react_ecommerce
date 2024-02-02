@@ -143,7 +143,7 @@ function OrderScreen({ match, history, t }) {
                                                         </Col>
 
                                                         <Col md={5} style={{direction: "ltr"}}>
-                                                            {item.qty} X {item.price}{t(get_currency())} = {(item.qty * item.price).toFixed(2)}{t(get_currency())}
+                                                            <span>{item.qty}</span><span> X </span><span>{item.price}</span><span>{t(get_currency())}</span><span> = </span><span>{(item.qty * item.price).toFixed(2)}</span><span>{t(get_currency())}</span>
                                                         </Col>
                                                     </Row>
                                                 </ListGroup.Item>
@@ -166,28 +166,28 @@ function OrderScreen({ match, history, t }) {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Items")}:</Col>
-                                            <Col>{order.itemsPrice}{t(get_currency())}</Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.itemsPrice}</span><span>{t(get_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Shipping")}:</Col>
-                                            <Col>{order.shippingPrice}{t(get_currency())}</Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.shippingPrice}</span><span>{t(get_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Tax")}:</Col>
-                                            <Col>{order.taxPrice}{t(get_currency())}</Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.taxPrice}</span><span>{t(get_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Total")}:</Col>
-                                            <Col>{order.totalPrice}{t(get_currency())}</Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.totalPrice}</span><span>{t(get_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 

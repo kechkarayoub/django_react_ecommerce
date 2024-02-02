@@ -2,6 +2,10 @@ main{
     min-height: 80vh;
 }
 
+body > iframe{
+  display: none;
+}
+
 h1{
   font-size: 1.8rem;
   padding:1rem 0;
@@ -198,14 +202,20 @@ ul.pagination.rtl{
   max-width: 100%;
 }
 .product_screen.rtl .card *{
-  direction: rtl;
 }
 .product_screen.rtl .card .row{
   text-align: right;
 }
+.product_screen.rtl .card .row .col{
+  direction: rtl;
+}
 .product_screen.rtl .reviews_row *{
   text-align: right;
   direction: rtl;
+}
+.product_screen.rtl .row{
+  flex-direction: row-reverse;
+  text-align: right;
 }
 .product_screen.rtl .product_details *{
   text-align: right;

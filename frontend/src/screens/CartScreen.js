@@ -41,7 +41,7 @@ function CartScreen({ match, location, history, t }) {
                 {cartItems.length === 0 ? (
                     <Message variant='info'>
                             <>
-                                {t("Your cart is empty")} <Link to='/'>{t("Go Back")}</Link>
+                                {t("Your cart is empty")} <Link to='/'><strong>{t("Go Back")}</strong></Link>
                             </>
                     </Message>
                 ) : (
@@ -56,8 +56,8 @@ function CartScreen({ match, location, history, t }) {
                                             <Link to={`/product/${item.product}`}>{item.name}</Link>
                                         </Col>
 
-                                        <Col md={2}>
-                                            {item.price}{t(get_currency())}
+                                        <Col md={2} style={current_language == "ar" ? {} : {}}>
+                                            <span>{item.price}</span><span>{t(get_currency())}</span>
                                         </Col>
 
                                         <Col md={3}>
@@ -99,7 +99,7 @@ function CartScreen({ match, location, history, t }) {
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                                 <h2>{t("Subtotal")} ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) {t(cartItems.reduce((acc, item) => acc + item.qty, 0) > 1 ? "items" : "item")}</h2>
-                            {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}{t(get_currency())}
+                            <div style={current_language == "ar" ? {display: "flex", flexDirection: "row-reverse"} : {}}><span>{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</span><span>{t(get_currency())}</span></div>
                         </ListGroup.Item>
                     </ListGroup>
 

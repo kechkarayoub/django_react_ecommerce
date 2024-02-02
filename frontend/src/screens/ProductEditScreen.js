@@ -129,7 +129,7 @@ function ProductEditScreen({ match, history, t }) {
     return (
         <div className={"product_edit_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Link to='/admin/productlist'>
-                {t("Go Back")}
+                <strong>{t("Go Back")}</strong>
             </Link>
 
             <FormContainer>

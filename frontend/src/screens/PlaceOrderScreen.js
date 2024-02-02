@@ -120,28 +120,28 @@ function PlaceOrderScreen({ history, t }) {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Items")}:</Col>
-                                    <Col>{cart.itemsPrice}{t(get_currency())}</Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.itemsPrice}</span><span>{t(get_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Shipping")}:</Col>
-                                    <Col>{cart.shippingPrice}{t(get_currency())}</Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.shippingPrice}</span><span>{t(get_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Tax")}:</Col>
-                                    <Col>{cart.taxPrice}{t(get_currency())}</Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.taxPrice}</span><span>{t(get_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Total")}:</Col>
-                                    <Col>{cart.totalPrice}{t(get_currency())}</Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.totalPrice}</span><span>{t(get_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 

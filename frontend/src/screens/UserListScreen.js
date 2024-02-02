@@ -78,7 +78,7 @@ function UserListScreen({ history, t }) {
                                                 </Button>
                                             </LinkContainer>
 
-                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
+                                            <Button variant='danger' className='btn-sm' style={current_language == "ar" ? {marginRight: 10} : {marginLeft: 10}} onClick={() => deleteHandler(user._id)}>
                                                 <i className='fas fa-trash'></i>
                                             </Button>
                                         </td>

@@ -53,7 +53,7 @@ function UserEditScreen({ match, history, t }) {
     return (
         <div className={"user_edit_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <Link to='/admin/userlist'>
-                {t("Go Back")}
+                <strong>{t("Go Back")}</strong>
             </Link>
 
             <FormContainer>

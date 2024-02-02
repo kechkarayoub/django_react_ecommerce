@@ -61,7 +61,7 @@ function ProductScreen({ match, history, t }) {
     const current_language = get("current_language");
     return (
         <div className={"product_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
-            <Link to='/' className='btn btn-light my-3'>{t("Go Back")}</Link>
+            <Link to='/' className='btn btn-light my-3'><strong>{t("Go Back")}</strong></Link>
             {loading ?
                 <Loader />
                 : error
@@ -85,7 +85,7 @@ function ProductScreen({ match, history, t }) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            {t("Price")}: {product.price}{t(get_currency())}
+                                            <span>{t("Price")}: </span><span>{product.price}</span><span>{t(get_currency())}</span>
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -102,7 +102,7 @@ function ProductScreen({ match, history, t }) {
                                                 <Row>
                                                     <Col>{t("Price")}:</Col>
                                                     <Col>
-                                                        <strong>{product.price}{t(get_currency())}</strong>
+                                                        <strong style={{display: "flex"}}><span>{product.price}</span><span>{t(get_currency())}</span></strong>
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>

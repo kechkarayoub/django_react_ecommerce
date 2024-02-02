@@ -47,7 +47,7 @@ function ProductListScreen({ history, match, t }) {
 
     const deleteHandler = (id) => {
 
-        if (window.confirm('Are you sure you want to delete this product?')) {
+        if (window.confirm(t('Are you sure you want to delete this product?'))) {
             dispatch(deleteProduct(id))
         }
     }
@@ -101,7 +101,7 @@ function ProductListScreen({ history, match, t }) {
                                         <tr key={product._id}>
                                             <td>{product._id}</td>
                                             <td>{product.name}</td>
-                                            <td>{product.price}{t(get_currency())}</td>
+                                            <td style={{display: "inline-flex", border: 0}}><span>{product.price}</span><span>{t(get_currency())}</span></td>
                                             <td>{product.category}</td>
                                             <td>{product.brand}</td>
 
@@ -112,7 +112,7 @@ function ProductListScreen({ history, match, t }) {
                                                     </Button>
                                                 </LinkContainer>
 
-                                                <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                                <Button variant='danger' className='btn-sm' style={current_language == "ar" ? {marginRight: 10} : {marginLeft: 10}} onClick={() => deleteHandler(product._id)}>
                                                     <i className='fas fa-trash'></i>
                                                 </Button>
                                             </td>

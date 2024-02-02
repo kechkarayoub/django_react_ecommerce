@@ -59,8 +59,7 @@ function OrderListScreen({ history, t }) {
                                         <td>{order._id}</td>
                                         <td>{order.user && order.user.name}</td>
                                         <td>{order.createdAt.substring(0, 10)}</td>
-                                        <td>{order.totalPrice}{t(get_currency())}</td>
-
+                                        <td style={{display: "inline-flex", border: 0}}><span>{order.totalPrice}</span><span>{t(get_currency())}</span></td>
                                         <td>{order.isPaid ? (
                                             order.paidAt.substring(0, 10)
                                         ) : (
