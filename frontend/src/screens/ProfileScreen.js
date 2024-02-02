@@ -10,6 +10,7 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 import { listMyOrders } from '../actions/orderActions'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
+import {get_currency} from "../utils";
 
 function ProfileScreen({ history, t }) {
 
@@ -53,7 +54,7 @@ function ProfileScreen({ history, t }) {
         e.preventDefault()
 
         if (password != confirmPassword) {
-            setMessage('Passwords do not match')
+            setMessage(t('Passwords do not match'))
         } else {
             dispatch(updateUserProfile({
                 'id': user._id,
@@ -155,8 +156,11 @@ function ProfileScreen({ history, t }) {
                                         <tr key={order._id}>
                                             <td>{order._id}</td>
                                             <td>{order.createdAt.substring(0, 10)}</td>
-                                            <td>${order.totalPrice}</td>
+                                            <td>{order.totalPrice}{t(get_currency())}</td>
                                             <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
+                                                <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                            )}</td>
+                                            <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : (
                                                 <i className='fas fa-times' style={{ color: 'red' }}></i>
                                             )}</td>
                                             <td>

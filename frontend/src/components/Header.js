@@ -14,6 +14,8 @@ function Header({t}) {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+    const cart = useSelector(state => state.cart)
+    const { cartItems } = cart
 
     const dispatch = useDispatch()
 
@@ -36,7 +38,7 @@ function Header({t}) {
                         <Nav className={current_language == "ar" ? 'mr-auto' : 'ml-auto'}>
 
                             <LinkContainer to='/cart'>
-                                <Nav.Link ><i className="fas fa-shopping-cart"></i>{t("Cart")}</Nav.Link>
+                                <Nav.Link ><i className="fas fa-shopping-cart"></i>{t("Cart")}{cartItems.length ? "(" + cartItems.length + ")" : ""}</Nav.Link>
                             </LinkContainer>
 
                             {userInfo ? (

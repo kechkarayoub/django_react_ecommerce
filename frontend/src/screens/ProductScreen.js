@@ -9,6 +9,7 @@ import { listProductDetails, createProductReview } from '../actions/productActio
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
+import {get_currency} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -73,7 +74,7 @@ function ProductScreen({ match, history, t }) {
                                 </Col>
 
 
-                                <Col md={3}>
+                                <Col md={3} className='product_details'>
                                     <ListGroup variant="flush">
                                         <ListGroup.Item>
                                             <h3>{product.name}</h3>
@@ -84,7 +85,7 @@ function ProductScreen({ match, history, t }) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            {t("Price")}: ${product.price}
+                                            {t("Price")}: {product.price}{t(get_currency())}
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -101,7 +102,7 @@ function ProductScreen({ match, history, t }) {
                                                 <Row>
                                                     <Col>{t("Price")}:</Col>
                                                     <Col>
-                                                        <strong>${product.price}</strong>
+                                                        <strong>{product.price}{t(get_currency())}</strong>
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>
@@ -154,7 +155,7 @@ function ProductScreen({ match, history, t }) {
                                 </Col>
                             </Row>
 
-                            <Row>
+                            <Row className='reviews_row'>
                                 <Col md={6}>
                                     <h4>{t("Reviews")}</h4>
                                     {product.reviews.length === 0 && <Message variant='info'>{t("No Reviews")}</Message>}

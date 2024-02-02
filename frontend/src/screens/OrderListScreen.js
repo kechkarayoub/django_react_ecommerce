@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import { listOrders } from '../actions/orderActions'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
+import {get_currency} from "../utils";
 
 function OrderListScreen({ history, t }) {
 
@@ -58,7 +59,7 @@ function OrderListScreen({ history, t }) {
                                         <td>{order._id}</td>
                                         <td>{order.user && order.user.name}</td>
                                         <td>{order.createdAt.substring(0, 10)}</td>
-                                        <td>${order.totalPrice}</td>
+                                        <td>{order.totalPrice}{t(get_currency())}</td>
 
                                         <td>{order.isPaid ? (
                                             order.paidAt.substring(0, 10)

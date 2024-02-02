@@ -90,6 +90,7 @@ const LanguageSelectStyle = styled.div`
         padding: 10px;
         position: absolute;
         top: 100%;
+        z-index: 1;
         li{
             border-bottom: 1px solid gray;
             color: black;

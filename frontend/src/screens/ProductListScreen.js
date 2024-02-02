@@ -9,6 +9,7 @@ import { listProducts, deleteProduct, createProduct } from '../actions/productAc
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
+import {get_currency} from "../utils";
 
 function ProductListScreen({ history, match, t }) {
 
@@ -63,7 +64,7 @@ function ProductListScreen({ history, match, t }) {
                     <h1>{t("Products")}</h1>
                 </Col>
 
-                <Col className='text-right'>
+                <Col className={current_language == "ar" ? 'text-left' :'text-right'}>
                     <Button className='my-3' onClick={createProductHandler}>
                         <i className='fas fa-plus'></i> {t("Create Product")}
                     </Button>
@@ -100,7 +101,7 @@ function ProductListScreen({ history, match, t }) {
                                         <tr key={product._id}>
                                             <td>{product._id}</td>
                                             <td>{product.name}</td>
-                                            <td>${product.price}</td>
+                                            <td>{product.price}{t(get_currency())}</td>
                                             <td>{product.category}</td>
                                             <td>{product.brand}</td>
 

@@ -6,6 +6,8 @@ import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
+import {get_currency} from "../utils";
+
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
 function CartScreen({ match, location, history, t }) {
@@ -55,7 +57,7 @@ function CartScreen({ match, location, history, t }) {
                                         </Col>
 
                                         <Col md={2}>
-                                            ${item.price}
+                                            {item.price}{t(get_currency())}
                                         </Col>
 
                                         <Col md={3}>
@@ -76,7 +78,7 @@ function CartScreen({ match, location, history, t }) {
                                             </Form.Control>
                                         </Col>
 
-                                        <Col md={1}>
+                                        <Col md={2}>
                                             <Button
                                                 type='button'
                                                 variant='light'
@@ -97,7 +99,7 @@ function CartScreen({ match, location, history, t }) {
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                                 <h2>{t("Subtotal")} ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) {t(cartItems.reduce((acc, item) => acc + item.qty, 0) > 1 ? "items" : "item")}</h2>
-                            ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
+                            {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}{t(get_currency())}
                         </ListGroup.Item>
                     </ListGroup>
 

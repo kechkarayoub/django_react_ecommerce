@@ -108,8 +108,9 @@ def uploadImage(request):
 
     product.image = request.FILES.get('image')
     product.save()
+    serializer = ProductSerializer(product, many=False)
 
-    return Response('Image was uploaded')
+    return Response({'image': serializer.data.get('image'), 'message': 'Image was uploaded'})
 
 
 @api_view(['POST'])

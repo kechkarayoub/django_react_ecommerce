@@ -9,6 +9,7 @@ import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
+import {get_currency} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -141,8 +142,8 @@ function OrderScreen({ match, history, t }) {
                                                             <Link to={`/product/${item.product}`}>{item.name}</Link>
                                                         </Col>
 
-                                                        <Col md={4}>
-                                                            {item.qty} X ${item.price} = ${(item.qty * item.price).toFixed(2)}
+                                                        <Col md={5} style={{direction: "ltr"}}>
+                                                            {item.qty} X {item.price}{t(get_currency())} = {(item.qty * item.price).toFixed(2)}{t(get_currency())}
                                                         </Col>
                                                     </Row>
                                                 </ListGroup.Item>
@@ -165,28 +166,28 @@ function OrderScreen({ match, history, t }) {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Items")}:</Col>
-                                            <Col>${order.itemsPrice}</Col>
+                                            <Col>{order.itemsPrice}{t(get_currency())}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Shipping")}:</Col>
-                                            <Col>${order.shippingPrice}</Col>
+                                            <Col>{order.shippingPrice}{t(get_currency())}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Tax")}:</Col>
-                                            <Col>${order.taxPrice}</Col>
+                                            <Col>{order.taxPrice}{t(get_currency())}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Total")}:</Col>
-                                            <Col>${order.totalPrice}</Col>
+                                            <Col>{order.totalPrice}{t(get_currency())}</Col>
                                         </Row>
                                     </ListGroup.Item>
 

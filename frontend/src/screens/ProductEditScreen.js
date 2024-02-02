@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Image, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -10,6 +10,7 @@ import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
+import {images} from "../_resources";
 
 
 function ProductEditScreen({ match, history, t }) {
@@ -93,7 +94,30 @@ function ProductEditScreen({ match, history, t }) {
             const { data } = await instance_backend.post('/api/products/upload/', formData, config)
 
 
-            setImage(data)
+            setImage(data.image)
+            setUploading(false)
+
+        } catch (error) {
+            setUploading(false)
+        }
+    }
+    const handleRemoveImage = async (e) => {
+        const formData = new FormData()
+
+        formData.append('image', null)
+        formData.append('product_id', productId)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await instance_backend.post('/api/products/upload/', formData, config)
+
+
+            setImage(data.image)
             setUploading(false)
 
         } catch (error) {
@@ -144,23 +168,46 @@ function ProductEditScreen({ match, history, t }) {
 
                             <Form.Group controlId='image'>
                                 <Form.Label>{t("Image")}</Form.Label>
-                                <Form.Control
+                                {/* <Form.Control
 
                                     type='text'
                                     placeholder='Enter image'
                                     value={image}
                                     onChange={(e) => setImage(e.target.value)}
                                 >
-                                </Form.Control>
+                                </Form.Control> */}
+                                <Form.Group controlId="formImagePreview" className='image_preview'>
+                                    <Image src={image ? BACKEND_URL + image : images.noImage} thumbnail />
+                                    <div className='actions'>
+                                        <Form.Group controlId="formSelectButton">
+                                            <Form.File
+                                                id='image-file'
+                                                label={t(image ? 'Update image' : 'Choose image')}
+                                                custom
+                                                accept="image/*"
+                                                onChange={uploadFileHandler}
+                                            >
 
-                                <Form.File
+                                            </Form.File>
+                                        </Form.Group>
+                                        {image &&
+                                            <Form.Group controlId="formRemoveButton">
+                                                <Button variant="danger" onClick={handleRemoveImage}>
+                                                    {t("Remove Image")}
+                                                </Button>
+                                            </Form.Group>
+                                        }
+                                    </div>
+                                </Form.Group>
+                                {/* <Form.File
                                     id='image-file'
-                                    label='Choose File'
+                                    label={t(image ? 'Update image' : 'Choose image')}
                                     custom
+                                    accept="image/*"
                                     onChange={uploadFileHandler}
                                 >
 
-                                </Form.File>
+                                </Form.File> */}
                                 {uploading && <Loader />}
 
                             </Form.Group>

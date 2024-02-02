@@ -5,3 +5,6 @@ export const get_site_infos = () => {
         site_name: "ProShop",
     };
 };
+export const get_currency = () => {
+    return '$';
+};

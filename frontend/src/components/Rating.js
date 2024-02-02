@@ -1,9 +1,11 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next';
+import {get} from "../storage";
 
 function Rating({ value, text, color }) {
+    const current_language = get("current_language");
     return (
-        <div className="rating">
+        <div className={"rating " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <span>
                 <i style={{ color }} className={
                     value >= 1
