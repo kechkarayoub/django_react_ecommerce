@@ -57,13 +57,59 @@ h3{
   }
 }
 
+footer .footer_content{
+  color: white;
+}
 footer .footer_content span{
   margin: 0 3px;
 }
 footer.rtl .footer_content{
   justify-content: center;
-    display: flex;
-    flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row-reverse;
+}
+footer .footer_sides{
+  justify-content: flex-end;
+}
+footer.rtl .footer_sides{
+  display: flex;
+  flex-direction: row-reverse;
+  min-height: 50px;
+}
+footer.rtl .footer_sides *{
+  direction: rtl;
+  text-align: right;
+}
+footer .footer_sides .social_network_pages{
+  padding-top: 20px;  
+}
+footer .footer_sides .social_network_pages .card{
+  padding: 10px;
+  border: 0;
+  width: 100%;
+  margin: auto;
+  max-width: 280px;
+  background-color: transparent;
+  color: white;
+}
+footer .footer_sides .social_network_pages .card .card-body{
+  padding: 0;
+  display: flex;
+  padding: 10px;
+  display: flex;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+}
+footer .footer_sides .social_network_pages .card .card-body > span{
+  margin: 0 10px;
+}
+footer.rtl .footer_sides .social_network_pages{
+  
+}
+footer.rtl .footer_sides .social_network_pages .card{
+}
+footer.rtl .footer_sides .social_network_pages .card .card-body{
 }
 header.rtl nav .container{
   flex-direction: row-reverse;

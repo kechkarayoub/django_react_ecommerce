@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Product, Order, OrderItem, ShippingAddress, Review
+from .models import Product, Order, OrderItem, ShippingAddress, Review, SocialNetworkPage
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -56,6 +56,12 @@ class ProductSerializer(serializers.ModelSerializer):
         reviews = obj.review_set.all()
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
+
+
+class SocialNetworkPageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialNetworkPage
+        fields = '__all__'
 
 
 class ShippingAddressSerializer(serializers.ModelSerializer):

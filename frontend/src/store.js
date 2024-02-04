@@ -12,6 +12,7 @@ import {
 } from './reducers/productReducers'
 
 import { cartReducer } from './reducers/cartReducers'
+import { socialNetworkPageListReducer } from './reducers/socialNetworPageReducers'
 
 import {
     userLoginReducer,
@@ -40,6 +41,8 @@ const reducer = combineReducers({
     productUpdate: productUpdateReducer,
     productReviewCreate: productReviewCreateReducer,
     productTopRated: productTopRatedReducer,
+
+    socialNetworkPageList: socialNetworkPageListReducer,
 
     cart: cartReducer,
     userLogin: userLoginReducer,

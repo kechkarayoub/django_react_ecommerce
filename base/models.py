@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from colorfield.fields import ColorField
+
 
 # Create your models here.
 
@@ -85,3 +87,15 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return str(self.address)
+
+
+class SocialNetworkPage(models.Model):
+    name = models.CharField(max_length=255)
+    url = models.URLField()
+    icon_url = models.URLField(blank=True, null=True)
+    font_icon = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    color = ColorField(default='#FFFFFF')
+
+    def __str__(self):
+        return self.name
