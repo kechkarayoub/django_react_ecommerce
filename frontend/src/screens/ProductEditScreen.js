@@ -146,7 +146,7 @@ function ProductEditScreen({ match, history, t }) {
                                 <Form.Control
 
                                     type='name'
-                                    placeholder='Enter name'
+                                    placeholder={t('Enter name')}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 >
@@ -158,7 +158,7 @@ function ProductEditScreen({ match, history, t }) {
                                 <Form.Control
 
                                     type='number'
-                                    placeholder='Enter price'
+                                    placeholder={t('Enter price')}
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                 >
@@ -218,7 +218,7 @@ function ProductEditScreen({ match, history, t }) {
                                 <Form.Control
 
                                     type='text'
-                                    placeholder='Enter brand'
+                                    placeholder={t('Enter brand')}
                                     value={brand}
                                     onChange={(e) => setBrand(e.target.value)}
                                 >
@@ -230,7 +230,7 @@ function ProductEditScreen({ match, history, t }) {
                                 <Form.Control
 
                                     type='number'
-                                    placeholder='Enter stock'
+                                    placeholder={t('Enter stock')}
                                     value={countInStock}
                                     onChange={(e) => setCountInStock(e.target.value)}
                                 >
@@ -242,7 +242,7 @@ function ProductEditScreen({ match, history, t }) {
                                 <Form.Control
 
                                     type='text'
-                                    placeholder='Enter category'
+                                    placeholder={t('Enter category')}
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
                                 >
@@ -254,7 +254,7 @@ function ProductEditScreen({ match, history, t }) {
                                 <Form.Control
 
                                     type='text'
-                                    placeholder='Enter description'
+                                    placeholder={t('Enter description')}
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                 >

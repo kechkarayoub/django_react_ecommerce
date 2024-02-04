@@ -32,7 +32,9 @@ function ProductCarousel({t}) {
                             <Link to={`/product/${product._id}`}>
                                 <Image src={BACKEND_URL + product.image} alt={product.name} fluid />
                                 <Carousel.Caption className='carousel.caption'>
-                                    <h4>{product.name} ({product.price}{t(get_currency())})</h4>
+                                    <h4>
+                                        <span style={current_language == "ar" ? {marginLeft: 5} : {marginRight: 5}}>{product.name}</span> (<span>{product.price}</span><span>{t(get_currency())}</span>)
+                                    </h4>
                                 </Carousel.Caption>
                             </Link>
                         </Carousel.Item>

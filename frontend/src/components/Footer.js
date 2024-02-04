@@ -25,6 +25,9 @@ function Footer({t}) {
                 <Row className='footer_sides'>
                     {ACTIVATE_SOCIAL_NETWORK_PAGES && 
                         <Col  md={4} sm={12} className="social_network_pages">
+                            <div className='title'>
+                                {t("Follow us on")}:
+                            </div>
                             {loading ? <Loader />
                             :
                             <>

@@ -91,6 +91,9 @@ const LanguageSelectStyle = styled.div`
         position: absolute;
         top: 100%;
         z-index: 1;
+        &:hover{
+            z-index: 10;
+        }
         li{
             border-bottom: 1px solid gray;
             color: black;
