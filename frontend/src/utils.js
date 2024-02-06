@@ -8,3 +8,8 @@ export const get_site_infos = () => {
 export const get_currency = () => {
     return '$';
 };
+
+export const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
