@@ -12,14 +12,18 @@ def createNewsletter(request):
     data = request.data
 
     newsletter = Newsletter.objects.filter(email=data["email"]).first()
+    if newsletter:
+        newsletter.name = data["name"]
+        newsletter.language = data["language"]
     if newsletter and newsletter.is_active:
+        newsletter.save()
         content = {'detail': 'You are already subscribed'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
     elif newsletter:
         newsletter.is_active = True
         newsletter.save()
     else:
-        newsletter = Newsletter.objects.create(name=data["name"], email=data["email"])
+        newsletter = Newsletter.objects.create(name=data["name"], email=data["email"], language=data["language"])
 
     newsletter.save()
 

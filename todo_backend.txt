@@ -1,0 +1,37 @@
+Create backend/local_settings.py with this content:
+    import os
+    from datetime import timedelta
+    from pathlib import Path
+    # Build paths inside the project like this: BASE_DIR / 'subdir'.
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    # Quick-start development settings - unsuitable for production
+    # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
+    ENVIRONEMENT = "dev"
+    # Database
+    # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'proshop',
+            'USER': 'dennisivy',
+            'PASSWORD': os.environ.get('DB_PASS'),
+            'HOST': os.environ.get('HOST'),
+            'PORT': '5432'
+        }
+    }
+    # sendgrid django setting
+    SENDGRID_API_KEY = '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'
+    EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+    EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_FROM_ADDRESS = 'edxkls2019@gmail.com'
+    BACKEND_URL = "http://localhost:8000"
+    FRONT_URL = "http://localhost:3000"
+    ACTIVATE_SOCIAL_NETWORK_PAGES = False
+    SHOW_UNSUBSCRIBE_LINK_ON_EMAILS = True
+
+
+

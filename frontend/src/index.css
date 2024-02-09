@@ -59,6 +59,13 @@ h3{
 
 footer .footer_content{
   color: white;
+  border: 1px solid white;
+  border-radius: 30px;
+  width: max-content;
+  min-width: unset;
+  max-width: max-content;
+  margin: 10px auto;
+  padding: 1rem 2rem;
 }
 footer .footer_content span{
   margin: 0 3px;
@@ -98,6 +105,7 @@ footer .footer_sides .social_network_pages .title{
   margin: auto;
   max-width: 280px;
   padding: 10px;
+  height: 62px;
 }
 footer .footer_sides .social_network_pages .card{
   padding: 10px;
@@ -126,6 +134,36 @@ footer.rtl .footer_sides .social_network_pages{
 footer.rtl .footer_sides .social_network_pages .card{
 }
 footer.rtl .footer_sides .social_network_pages .card .card-body{
+}
+footer .footer_sides .newsletter_subscription{
+  padding-top: 20px;  
+}
+footer .footer_sides .newsletter_subscription .title{
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  margin: auto;
+  max-width: 280px;
+  padding: 10px;
+  height: 62px;
+}
+footer .footer_sides .newsletter_subscription .newsletter_form{
+  padding: 10px;
+  border: 0;
+  width: 100%;
+  margin: auto;
+  max-width: 280px;
+  background-color: transparent;
+  color: white;
+}
+footer .footer_sides .newsletter_subscription .newsletter_form form{
+}
+footer .footer_sides .newsletter_subscription .newsletter_form form .form-group{
+}
+footer .footer_sides .newsletter_subscription .newsletter_form form button{
+  background: #00d5ff;
+  color: black;
+  border-radius: 10px;
 }
 header.rtl nav .container{
   flex-direction: row-reverse;

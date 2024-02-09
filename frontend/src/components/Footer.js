@@ -35,7 +35,7 @@ function Footer({t}) {
         else if(name){
             setSubmiting(true);
             dispatch(createNewsletter({
-                name, email
+                name, email, language: current_language,
             }, () => {
                 setName("");
                 setEmail("");

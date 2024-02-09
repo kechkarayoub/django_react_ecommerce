@@ -1,0 +1,41 @@
+{% extends "emails/base.html" %}
+{% load i18n %}
+
+{% block title %}{{subject}}{% endblock %}
+{% block custom_style %}
+
+{% endblock %}
+
+{% if False %}@{% endif %}
+{% block content %}
+    <p class="content {{direction}}" style="direction: {{direction}}">
+        {% for product in products %}
+            <div class="card {{direction}}">
+                <div class="image">
+                    <img src={{product.image}} />
+                </div>
+
+                <div class="card-body">
+                    <div class="title">
+                        <strong>{product.name}</strong>
+                    </div>
+                    <h3>
+                        <span>{{product.price}}</span><span>{(currency)}</span>
+                    </h3>
+                </div>
+                <div class="button">
+                    <button>
+                        <a href="{{product.url}}" target="_blank">{% translate "Details" %}</a>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="card {{direction}}">
+            <div class="button">
+                <button>
+                    <a href="{{site_url}}" target="_blank">{% translate "Show more" %}</a>
+                </button>
+            </div>
+        </div>
+    </p>
+{% endblock %}

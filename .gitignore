@@ -4,6 +4,7 @@ venv/
 *.pyo
 __pycache__/
 *.pyd
+local_settings.py
 db.sqlite3
 media/
 staticfiles/

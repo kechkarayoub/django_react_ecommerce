@@ -6,7 +6,8 @@ export const get_site_infos = () => {
     };
 };
 export const get_currency = () => {
-    return '$';
+    if(true) return '$';
+    return 'DH';
 };
 
 export const validateEmail = (email) => {

@@ -59,7 +59,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_reviews(self, obj):
-        reviews = obj.review_set.all()
+        reviews = obj.review_set.filter(is_active=True)
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
 
@@ -92,7 +92,7 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_orderItems(self, obj):
-        items = obj.orderitem_set.all()
+        items = obj.orderitem_set.filter(is_active=True)
         serializer = OrderItemSerializer(items, many=True)
         return serializer.data
 

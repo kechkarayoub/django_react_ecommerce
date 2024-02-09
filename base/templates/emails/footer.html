@@ -1,0 +1,51 @@
+{% load i18n %}
+
+<footer>
+    <div class="row footer_sides">
+        {% if ACTIVATE_SOCIAL_NETWORK_PAGES %}
+            <div class="md col-md-12 social_network_pages">
+                <div class='title'>
+                    {% translate "Follow us on" %}
+                </div>
+                {% if social_network_pages|length == 0 %}
+                    <div class='no_social_network_page'>
+                        {% translate "Our social media pages are being implemented." %}
+                    </div>
+                {% endif %}
+                {% for snp in social_network_pages %}
+                    <div class="card {{direction}} ">
+                        <a href="{{ snp.url }}" target="_blank">
+                            <div class="card-body">
+                                <span class="card-text" >
+                                    <i class={{snp.font_icon}}></i>
+                                </span>
+                                <div class="card-text">
+                                    <div class="">
+                                        {{snp.name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if SHOW_UNSUBSCRIBE_LINK_ON_EMAILS %}
+            <div class="md col-md-12 unsubscribe_link">
+                <div class='title'>
+                    <span>{% translate "Unsubscribe from our newsletter?" %}</span>
+                    <a href="{{ unsubscribe_url }}" target="_blank">
+                        <div class="card-body">
+                            <div class="card-text">
+                                <div class="">
+                                    {% translate "Unsubscribe" %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        {% endif %}
+    </div>
+</footer>
