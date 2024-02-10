@@ -48,6 +48,7 @@ def projects_newsletter():
         }
         email_message_txt = render_to_string('emails/products_newsletter.txt', context)
         email_message_html = render_to_string('emails/products_newsletter.html', context)
+        print(email_message_html.replace("</b>", ""))
         # email_message_txt_html = email_message_html.split('main>')[1][:-2].replace("<b>", "").replace("</b>", "")
         # email_message_txt = html2text.html2text(email_message_txt_html)
         """

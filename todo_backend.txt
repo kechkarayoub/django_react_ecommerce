@@ -28,10 +28,11 @@ Create backend/local_settings.py with this content:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_FROM_ADDRESS = 'edxkls2019@gmail.com'
-    BACKEND_URL = "http://localhost:8000"
+    BACKEND_URL = "http://localhost:8080"
     FRONT_URL = "http://localhost:3000"
-    ACTIVATE_SOCIAL_NETWORK_PAGES = False
+    ACTIVATE_SOCIAL_NETWORK_PAGES = True
     SHOW_UNSUBSCRIBE_LINK_ON_EMAILS = True
+    EMAIL_SMTP_PROVIDER = "sendgrid"
 
 
 

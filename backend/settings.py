@@ -18,6 +18,7 @@ ACTIVATE_SOCIAL_NETWORK_PAGES = True
 SHOW_UNSUBSCRIBE_LINK_ON_EMAILS = True
 ENVIRONEMENT = "dev"
 DEBUG = False
+EMAIL_SMTP_PROVIDER = ""
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

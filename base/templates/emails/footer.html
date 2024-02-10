@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<footer>
+<footer class="{{direction}}">
     <div class="row footer_sides">
         {% if ACTIVATE_SOCIAL_NETWORK_PAGES %}
             <div class="md col-md-12 social_network_pages">
@@ -17,7 +17,7 @@
                         <a href="{{ snp.url }}" target="_blank">
                             <div class="card-body">
                                 <span class="card-text" >
-                                    <i class={{snp.font_icon}}></i>
+                                    <i class="{{snp.font_icon}}"></i>
                                 </span>
                                 <div class="card-text">
                                     <div class="">

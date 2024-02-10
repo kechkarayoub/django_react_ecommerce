@@ -3,14 +3,111 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
         <style>
+            body{
+                padding: 100px;
+            }
+            body > div{
+                border-radius: 10px;
+                padding: 50px;
+                background-color: #565658;
+            }
+            body > div main{
+                width: 100%;
+                max-width: 600px;
+                margin: auto;
+                margin-bottom: 30px;
+            }
 
-            {% block custom_style %}{% endblock %}
+            header{
+                width: 100%;
+                max-width: 600px;
+                margin: auto;
+                margin-bottom: 30px;
+            }
+            header > div{
+                height: 80px;
+                text-align: left;
+                width: 100%;
+                background-color: darkgrey;
+            }
+            header > div a{
+                text-decoration: none;
+                color: white;
+                width: max-content;
+                display: block;
+            }
+            header > div a div{
+                font-size: 18px;
+                font-weight: bold;
+                line-height: 80px;
+                width: max-content;
+                padding: 0 20px;
+                margin-bottom: -10px;
+            }
+            header > div a img{
+                height: 80px;
+                width: auto;
+            }
+            header.rtl > div{
+                text-align: right;
+            }
+            header.rtl > div a{
+                float: right;
+            }
+
+            {% block main_style %}{% endblock %}
+
+            footer{
+                width: 100%;
+                max-width: 600px;
+                margin: auto;
+            }
+            footer .footer_sides{
+                background: darkgrey;
+                padding: 15px;
+            }
+            footer .footer_sides .social_network_pages{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            footer .footer_sides .social_network_pages .title{
+                width: 100%;
+                display: none;
+            }
+            footer .footer_sides .social_network_pages .card{
+                width: 50px;
+                border: 0;
+                margin: 0 10px;
+                padding: 10px;
+                text-align: center;
+            }
+            footer .footer_sides .social_network_pages .card div.card-text{
+                display: none;
+            }
+            footer .footer_sides .unsubscribe_link{
+            }
+            footer .footer_sides .unsubscribe_link .title{
+                display: flex;
+                color: #cdcaca !important;
+            }
+            footer .footer_sides .unsubscribe_link .title > span{
+               margin: 0 5px;
+            }
+            footer.rtl .footer_sides .social_network_pages{
+                flex-direction: row-reverse;
+            }
+            footer.rtl .footer_sides .unsubscribe_link .title{
+                flex-direction: row-reverse;
+            }
         </style>
         <title>{% block title %}{% endblock %}</title>
     </head>
-    <body style="padding: 100px;">
-        <div style="background: #1fa1cf0f; border: 2px solid #1fa1cf; border-radius: 10px; padding: 50px;">
+    <body >
+        <div>
             {% include "emails/header.html" %}
             <main>
                 {% block content %}{% endblock %}

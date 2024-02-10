@@ -28,12 +28,17 @@ class Product(models.Model):
         return self.name
 
     def to_newsletter_dict(self):
+        image_url = self.image and self.image.url
+        if not image_url:
+            image_url = "/static/site_images/no_image.png"
+        else:
+            image_url = "/static" + image_url
         return {
             "price": self.price,
             "category": self.category,
             "brand": self.brand,
             "name": self.name,
-            "image": settings.BACKEND_URL + "/" + self.image,
+            "image": settings.BACKEND_URL + image_url,
             "url": settings.FRONT_URL + "/product/" + str(self._id)
         }
 
@@ -57,6 +62,7 @@ class Newsletter(models.Model):
     name = models.CharField(max_length=200, null=False, db_index=True)
     is_active = models.BooleanField(default=True, db_index=True)
     createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
+    language = models.CharField(max_length=10, default="fr", db_index=True)
 
     def __str__(self):
         return str(self.email)
