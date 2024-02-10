@@ -328,6 +328,29 @@ ul.pagination.rtl{
   text-align: right;
   direction: rtl;
 }
+.unsubscribe_from_newsletter_screen{
+  max-width: 500px;
+  margin: auto;
+  width: 100%;
+}
+.unsubscribe_from_newsletter_screen .go_home{
+  color: #1a1a1a;
+  background-color: #ececec;
+  border-color: #e6e6e6;
+  border-radius: 10px;
+}
+.unsubscribe_from_newsletter_screen form button{
+  border-radius: 10px;
+  background: #f55050;
+}
+.unsubscribe_from_newsletter_screen .no_service_message{
+}
+.unsubscribe_from_newsletter_screen .unsubscribed_message{
+}
+.unsubscribe_from_newsletter_screen.rtl{
+  direction: rtl;
+  text-align: right;
+}
 .user_edit_screen.rtl *{
   text-align: right;
 }

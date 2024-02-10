@@ -34,4 +34,30 @@ export const createNewsletter = (newsletter, callback) => async (dispatch, getSt
     }
 }
 
+export const unsubscribeFromNewsletter = (email, callback) => async (dispatch, getState) => {
+    try {
+
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+            }
+        }
+
+        const { data } = await instance_backend.post(
+            `/api/newsletters/unsubscribe/${email}`,
+            {},
+            config
+        )
+        console.log(data);
+        if(callback)callback();
+
+    } catch (error) {
+        console.log(error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message)
+        if(callback)callback();
+    }
+}
+
 

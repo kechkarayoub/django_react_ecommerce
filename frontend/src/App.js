@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
+import UnsubscribeFromNewsletterScreen from './screens/UnsubscribeFromNewsletterScreen'
 import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
@@ -35,6 +36,7 @@ function App() {
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/product/:id' component={ProductScreen} />
+          <Route path='/unsubscribe_from_newsletter' component={UnsubscribeFromNewsletterScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
 
           <Route path='/admin/userlist' component={UserListScreen} />
