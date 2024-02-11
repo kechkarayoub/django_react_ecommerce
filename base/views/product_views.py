@@ -22,8 +22,8 @@ def projects_newsletter():
         :return: None
     """
     social_network_pages = [snp.to_newsletter_dict() for snp in SocialNetworkPage.objects.filter()]
-
-    products_ = Product.objects.filter(is_active=True).order_by("-createdAt")[:5]
+    date_to_compare = datetime.datetime.now() - datetime.timedelta(days=7)
+    products_ = Product.objects.filter(is_active=True, createdAt__gte=date_to_compare).order_by("-createdAt")[:5]
     products = []
     for product in products_:
         products.append(product.to_newsletter_dict())

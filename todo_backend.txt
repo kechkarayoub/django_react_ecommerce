@@ -36,3 +36,15 @@ Create backend/local_settings.py with this content:
 
 
 
+Create newsletter script to add it to crontab:
+    Create send_newsletter.sh:
+        #!/bin/bash
+        cd /path/to/your/django/project
+        source venv/bin/activate  # Activate your virtual environment
+        python manage.py send_products_newsletters
+    chmod +x send_newsletter.sh
+    Run "crontab -e":
+        Convert 5 AM GMT to your server's local time.
+        Add this line:
+            0 5 * * * /path/to/your/send_newsletter.sh  #  Run the newsletter script daily at 5 AM GMT
+
