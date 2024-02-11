@@ -3,7 +3,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from ..models import User
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -36,6 +37,7 @@ def registerUser(request):
             first_name=data['name'],
             username=data['email'],
             email=data['email'],
+            language=data.get('language', "fr"),
             password=make_password(data['password'])
         )
 
@@ -56,10 +58,24 @@ def updateUserProfile(request):
     user.first_name = data['name']
     user.username = data['email']
     user.email = data['email']
+    user.language = data.get('language', "fr") if "language" in data else user.language
 
     if data['password'] != '':
         user.password = make_password(data['password'])
 
+    user.save()
+
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateUserLanguage(request):
+    user = request.user
+    serializer = UserSerializerWithToken(user, many=False)
+
+    data = request.data
+    user.language = data.get('language', "fr") if "language" in data else user.language
     user.save()
 
     return Response(serializer.data)
@@ -76,7 +92,7 @@ def getUserProfile(request):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUsers(request):
-    users = User.objects.all()
+    users = User.objects.filter(is_active=True)
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
@@ -100,6 +116,7 @@ def updateUser(request, pk):
     user.username = data['email']
     user.email = data['email']
     user.is_staff = data['isAdmin']
+    user.language = data.get('language', "fr") if "language" in data else user.language
 
     user.save()
 

@@ -1,7 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from colorfield.fields import ColorField
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    class Meta:
+        indexes = [
+            models.Index(fields=['is_active']),
+            models.Index(fields=['is_staff']),
+            models.Index(fields=['is_superuser']),
+            models.Index(fields=['username']),
+            models.Index(fields=['first_name']),
+            models.Index(fields=['last_name']),
+            models.Index(fields=['email']),
+        ]
+    language = models.TextField(max_length=10, default="fr", db_index=True)
 
 
 # Create your models here.

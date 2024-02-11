@@ -26,9 +26,31 @@ class LanguageSelect extends Component {
         style: null,
         t: val => val,
     };
+    componentDidMount() {
+        document.addEventListener('setUserLanguageEvent', this.handleUserLanguageEvent);
+    }
+    
+    componentWillUnmount() {
+        document.removeEventListener('setUserLanguageEvent', this.handleUserLanguageEvent);
+    }
+    
+    handleUserLanguageEvent = (event) => {
+        debugger
+        if(event && event.detail && event.detail.language && this.state.selected_language != event.detail.language){
+            set("current_language", event.detail.language);
+            this.props.i18n.changeLanguage(event.detail.language);
+            this.setState({
+                open: false,
+                selected_language: event.detail.language,
+            });
+        }
+    };
     handleSelectLanguage = (evt, language) => {
         evt.stopPropagation();
         set("current_language", language);
+        if(this.props.saveUserLanguage){
+            this.props.saveUserLanguage(language);
+        }
         this.props.i18n.changeLanguage(language);
         this.setState({
             open: false,

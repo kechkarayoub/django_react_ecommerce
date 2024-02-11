@@ -60,8 +60,13 @@ export const login = (email, password) => async (dispatch) => {
             type: USER_LOGIN_SUCCESS,
             payload: data
         })
-
         localStorage.setItem('userInfo', JSON.stringify(data))
+        debugger
+        const setUserLanguageEvent = new CustomEvent('setUserLanguageEvent', {
+            detail: { language: data.language }
+        });
+        document.dispatchEvent(setUserLanguageEvent);
+
 
     } catch (error) {
         dispatch({
@@ -205,6 +210,37 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
                 ? error.response.data.detail
                 : error.message,
         })
+    }
+}
+
+
+export const updateUserLanguage = (user, callback) => async (dispatch, getState) => {
+    try {
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await instance_backend.put(
+            `/api/users/profile/update_language/`,
+            user,
+            config
+        )
+        if(callback){
+            callback();
+        }
+
+    } catch (error) {
+        console.log(error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message)
     }
 }
 

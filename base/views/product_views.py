@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import after_response
 from base.models import Product, Review, Newsletter, SocialNetworkPage
 from base.serializers import ProductSerializer
+from django.utils import timezone
 
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -22,7 +23,7 @@ def projects_newsletter():
         :return: None
     """
     social_network_pages = [snp.to_newsletter_dict() for snp in SocialNetworkPage.objects.filter()]
-    date_to_compare = datetime.datetime.now() - datetime.timedelta(days=7)
+    date_to_compare = timezone.now() - datetime.timedelta(days=7)
     products_ = Product.objects.filter(is_active=True, createdAt__gte=date_to_compare).order_by("-createdAt")[:5]
     products = []
     for product in products_:

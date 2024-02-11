@@ -8,6 +8,7 @@ import { withTranslation } from 'react-i18next';
 import {get_site_infos} from "../utils";
 import {ACTIVATE_TRANSLATONS} from "../app_config";
 import LanguageSelect from "./LanguageSelect"; 
+import { updateUserLanguage } from '../actions/userActions'
 import {get} from "../storage";
 
 function Header({t}) {
@@ -75,7 +76,12 @@ function Header({t}) {
                             )}
                             
                             {ACTIVATE_TRANSLATONS &&
-                                <LanguageSelect />
+                                <LanguageSelect saveUserLanguage={language => {
+                                    
+                                    dispatch(updateUserLanguage({
+                                        'language': language,
+                                    }));
+                                }} />
                             }
 
 

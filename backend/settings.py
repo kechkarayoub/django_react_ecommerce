@@ -19,6 +19,7 @@ SHOW_UNSUBSCRIBE_LINK_ON_EMAILS = True
 ENVIRONEMENT = "dev"
 DEBUG = False
 EMAIL_SMTP_PROVIDER = ""
+AUTH_USER_MODEL = 'base.User'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
