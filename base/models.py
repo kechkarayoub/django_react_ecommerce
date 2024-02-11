@@ -1,5 +1,4 @@
 from django.db import models
-# from django.contrib.auth.models import User
 from colorfield.fields import ColorField
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
@@ -16,7 +15,7 @@ class User(AbstractUser):
             models.Index(fields=['last_name']),
             models.Index(fields=['email']),
         ]
-    language = models.TextField(max_length=10, default="fr", db_index=True)
+    language = models.TextField(max_length=10, default="fr", choices=settings.LANGUAGES, db_index=True)
 
 
 # Create your models here.
@@ -77,7 +76,7 @@ class Newsletter(models.Model):
     name = models.CharField(max_length=200, null=False, db_index=True)
     is_active = models.BooleanField(default=True, db_index=True)
     createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
-    language = models.CharField(max_length=10, default="fr", db_index=True)
+    language = models.CharField(max_length=10, default="fr", choices=settings.LANGUAGES, db_index=True)
 
     def __str__(self):
         return str(self.email)

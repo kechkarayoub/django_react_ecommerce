@@ -1,0 +1,15 @@
+Install ugettext:
+     pip install python-gettext
+
+Gettext must be installed on windows. Use this link: https://mlocati.github.io/articles/gettext-iconv-windows.html
+
+For each app:
+    Go to the app folder:
+        cd app_name
+    If not exists, create locale folder inside the app:
+        mkdir locale
+    Create .po files:
+        For each language you want, run:
+            django-admin makemessages -l {language_code} # ex: fr, en, ar
+    Create .mo files by running:
+        django-admin compilemessages

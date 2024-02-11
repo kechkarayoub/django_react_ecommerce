@@ -1,10 +1,9 @@
-from django.shortcuts import render
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from base.models import Newsletter
 from base.serializers import NewsletterSerializer
 from rest_framework import status
+from django.utils.translation import gettext_lazy as _
 
 
 @api_view(['POST'])
@@ -17,7 +16,7 @@ def createNewsletter(request):
         newsletter.language = data["language"]
     if newsletter and newsletter.is_active:
         newsletter.save()
-        content = {'detail': 'You are already subscribed'}
+        content = {'detail': _('You are already subscribed')}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
     elif newsletter:
         newsletter.is_active = True
@@ -34,14 +33,14 @@ def createNewsletter(request):
 @api_view(['PUT'])
 def unsubscribeEmail(request, email):
     if Newsletter.objects.filter(email=email, is_active=True).update(is_active=False):
-        return Response('Unsubscribe successful')
+        return Response(_('Unsubscribe successful'))
     else:
-        content = {'detail': 'You are already subscribed'}
+        content = {'detail': _('You are already subscribed')}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
 def reregisterEmail(request, email):
     Newsletter.objects.filter(email=email).update(is_active=True)
-    return Response('Re-registration successful')
+    return Response(_('Re-registration successful'))
 

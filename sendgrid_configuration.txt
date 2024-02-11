@@ -1,0 +1,3 @@
+Go to www.sendgrid.com and log in into your account.
+Create an api key and set it in private.py file.
+Go to https://app.sendgrid.com/settings/sender_auth/senders and add create a sender. Then add the sender email address to EMAIL_FROM_ADDRESS variable

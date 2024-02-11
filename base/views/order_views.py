@@ -1,14 +1,13 @@
-from django.shortcuts import render
-
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
 from base.models import Product, Order, OrderItem, ShippingAddress
-from base.serializers import ProductSerializer, OrderSerializer
+from base.serializers import OrderSerializer
 
 from rest_framework import status
 from datetime import datetime
+from django.utils.translation import gettext_lazy as _
 
 
 @api_view(['POST'])
@@ -20,7 +19,7 @@ def addOrderItems(request):
     orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:
-        return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': _('No Order Items')}, status=status.HTTP_400_BAD_REQUEST)
     else:
 
         # (1) Create order
@@ -94,10 +93,10 @@ def getOrderById(request, pk):
             serializer = OrderSerializer(order, many=False)
             return Response(serializer.data)
         else:
-            Response({'detail': 'Not authorized to view this order'},
+            Response({'detail': _('Not authorized to view this order')},
                      status=status.HTTP_400_BAD_REQUEST)
     except:
-        return Response({'detail': 'Order does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': _('Order does not exist')}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
@@ -109,7 +108,7 @@ def updateOrderToPaid(request, pk):
     order.paidAt = datetime.now()
     order.save()
 
-    return Response('Order was paid')
+    return Response(_('Order was paid'))
 
 
 @api_view(['PUT'])
@@ -121,4 +120,4 @@ def updateOrderToDelivered(request, pk):
     order.deliveredAt = datetime.now()
     order.save()
 
-    return Response('Order was delivered')
+    return Response(_('Order was delivered'))

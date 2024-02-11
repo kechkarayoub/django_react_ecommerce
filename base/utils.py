@@ -9,6 +9,7 @@ import requests
 import random
 import os
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,7 +34,7 @@ def date_from_string(date_string):
 def get_currency():
     if True:
         return "$"
-    return 'DH'
+    return _('DH')
 
 
 @after_response.enable

@@ -1,17 +1,13 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
-
-# from django.contrib.auth.models import User
 from ..models import User
-from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
-# Create your views here.
+from base.serializers import UserSerializer, UserSerializerWithToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
+from django.utils.translation import gettext_lazy as _
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -44,7 +40,7 @@ def registerUser(request):
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
-        message = {'detail': 'User with this email already exists'}
+        message = {'detail': _('User with this email already exists')}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -129,4 +125,4 @@ def updateUser(request, pk):
 @permission_classes([IsAdminUser])
 def deleteUser(request, pk):
     User.objects.filter(id=pk).update(is_active=False)
-    return Response('User was deleted')
+    return Response(_('User was deactivated'))

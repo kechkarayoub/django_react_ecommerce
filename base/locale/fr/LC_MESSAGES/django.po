@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-11 15:13+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\templates\emails\footer.html:8
+msgid "Follow us on"
+msgstr "Suivez-nous sur"
+
+#: .\templates\emails\footer.html:12
+msgid "Our social media pages are being implemented."
+msgstr "Nos pages de médias sociaux sont en cours de mise en œuvre."
+
+#: .\templates\emails\footer.html:36
+msgid "Unsubscribe from our newsletter?"
+msgstr "Vous désabonner de notre newsletter ?"
+
+#: .\templates\emails\footer.html:41
+msgid "Unsubscribe"
+msgstr "Se désabonner"
+
+#: .\templates\emails\products_newsletter.html:102
+msgid "Details"
+msgstr "Détails"
+
+#: .\templates\emails\products_newsletter.html:110
+msgid "Show more"
+msgstr "Afficher plus"
+
+#: .\templates\emails\products_newsletter.txt:3
+msgid "Show more."
+msgstr "Afficher plus."
+
+#: .\utils.py:37
+msgid "DH"
+msgstr "DH"
+
+#: .\views\newsletter_views.py:19 .\views\newsletter_views.py:38
+msgid "You are already subscribed"
+msgstr "Vous êtes déjà abonné"
+
+#: .\views\newsletter_views.py:36
+msgid "Unsubscribe successful"
+msgstr "Désabonnement réussi"
+
+#: .\views\newsletter_views.py:45
+msgid "Re-registration successful"
+msgstr "Réinscription réussie"
+
+#: .\views\order_views.py:22
+msgid "No Order Items"
+msgstr "Aucun article en commande"
+
+#: .\views\order_views.py:96
+msgid "Not authorized to view this order"
+msgstr "Non autorisé à consulter cette commande"
+
+#: .\views\order_views.py:99
+msgid "Order does not exist"
+msgstr "La commande n'existe pas"
+
+#: .\views\order_views.py:111
+msgid "Order was paid"
+msgstr "La commande a été payée"
+
+#: .\views\order_views.py:123
+msgid "Order was delivered"
+msgstr "La commande a été livrée"
+
+#: .\views\product_views.py:33
+#, python-brace-format
+msgid "New products {site_name}"
+msgstr "Nouveaux produits {site_name}"
+
+#: .\views\product_views.py:62
+msgid "You should configure a smtp email provider"
+msgstr "Vous devez configurer un fournisseur de messagerie SMTP"
+
+#: .\views\product_views.py:149
+msgid "Producted deactivated"
+msgstr "Produit désactivé"
+
+#: .\views\product_views.py:163
+msgid "Image was uploaded"
+msgstr "L'image a été téléchargée"
+
+#: .\views\product_views.py:176
+msgid "Product already reviewed"
+msgstr "Produit déjà évalué"
+
+#: .\views\product_views.py:181
+msgid "Please select a rating"
+msgstr "Veuillez sélectionner une évaluation"
+
+#: .\views\product_views.py:204
+msgid "Review Added"
+msgstr "Avis ajouté"
+
+#: .\views\user_views.py:43
+msgid "User with this email already exists"
+msgstr "L'utilisateur avec cette adresse e-mail existe déjà"
+
+#: .\views\user_views.py:128
+msgid "User was deactivated"
+msgstr "L'utilisateur a été désactivé"

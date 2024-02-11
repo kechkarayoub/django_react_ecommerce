@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 ACTIVATE_SOCIAL_NETWORK_PAGES = True
 SHOW_UNSUBSCRIBE_LINK_ON_EMAILS = True
@@ -122,6 +123,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -165,9 +167,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr'
 
-TIME_ZONE = 'UTC'
+LANGUAGES = [
+    ('ar', _('Arabic')),
+    ('en', _('English')),
+    ('fr', _('French'))
+]
+
+TIME_ZONE = 'Africa/Casablanca'
 
 USE_I18N = True
 

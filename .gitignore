@@ -11,10 +11,14 @@ staticfiles/
 *.db
 *.sqlite3
 *.log
-*.pot
 **/migrations/
 **/migrations/__init__.py
 **/migrations/*.pyc
+
+
+# Translations
+*.mo
+*.pot
 
 # frontend
 

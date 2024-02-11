@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -8,7 +6,6 @@ import after_response
 from base.models import Product, Review, Newsletter, SocialNetworkPage
 from base.serializers import ProductSerializer
 from django.utils import timezone
-
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.translation import activate, gettext_lazy as _
@@ -62,7 +59,8 @@ def projects_newsletter():
         """
         response = send_email(email_subject, email_message_txt, emails, html_message=email_message_html)
         if response == "no_smtp_email_provider":
-            print('You should configure a smtp email provider')
+            print(_('You should configure a smtp email provider'))
+
 
 @api_view(['GET'])
 def getProducts(request):
@@ -148,7 +146,7 @@ def updateProduct(request, pk):
 @permission_classes([IsAdminUser])
 def deleteProduct(request, pk):
     Product.objects.filter(_id=pk).update(is_active=False)
-    return Response('Producted Deleted')
+    return Response(_('Producted deactivated'))
 
 
 @api_view(['POST'])
@@ -162,7 +160,7 @@ def uploadImage(request):
     product.save()
     serializer = ProductSerializer(product, many=False)
 
-    return Response({'image': serializer.data.get('image'), 'message': 'Image was uploaded'})
+    return Response({'image': serializer.data.get('image'), 'message': _('Image was uploaded')})
 
 
 @api_view(['POST'])
@@ -175,12 +173,12 @@ def createProductReview(request, pk):
     # 1 - Review already exists
     alreadyExists = product.review_set.filter(user=user, is_active=True).exists()
     if alreadyExists:
-        content = {'detail': 'Product already reviewed'}
+        content = {'detail': _('Product already reviewed')}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
     # 2 - No Rating or 0
     elif data['rating'] == 0:
-        content = {'detail': 'Please select a rating'}
+        content = {'detail': _('Please select a rating')}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
     # 3 - Create review
@@ -203,4 +201,4 @@ def createProductReview(request, pk):
         product.rating = total / len(reviews)
         product.save()
 
-        return Response('Review Added')
+        return Response(_('Review Added'))
