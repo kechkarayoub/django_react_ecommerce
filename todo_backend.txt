@@ -22,7 +22,7 @@ Create backend/local_settings.py with this content:
         }
     }
     # sendgrid django setting
-    SENDGRID_API_KEY = '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'
+    SENDGRID_API_KEY = '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'
     EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
     EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
     EMAIL_PORT = 587
