@@ -35,7 +35,6 @@ class LanguageSelect extends Component {
     }
     
     handleUserLanguageEvent = (event) => {
-        debugger
         if(event && event.detail && event.detail.language && this.state.selected_language != event.detail.language){
             set("current_language", event.detail.language);
             this.props.i18n.changeLanguage(event.detail.language);

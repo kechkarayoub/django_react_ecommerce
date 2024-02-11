@@ -61,7 +61,6 @@ export const login = (email, password) => async (dispatch) => {
             payload: data
         })
         localStorage.setItem('userInfo', JSON.stringify(data))
-        debugger
         const setUserLanguageEvent = new CustomEvent('setUserLanguageEvent', {
             detail: { language: data.language }
         });
