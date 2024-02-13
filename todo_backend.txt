@@ -33,6 +33,8 @@ Create backend/local_settings.py with this content:
     ACTIVATE_SOCIAL_NETWORK_PAGES = True
     SHOW_UNSUBSCRIBE_LINK_ON_EMAILS = True
     EMAIL_SMTP_PROVIDER = "sendgrid"
+    MAILGUN_DOMAIN_NAME = "sandboxcb64cacb300c4070b8539784fd24e3a3.mailgun.org"
+    MAILGUN_APIKEY = "e83f255dbb6f662e6e0e8ccad6225053-8c8e5529-f84cd7f0"
 
 
 

@@ -37,6 +37,20 @@ def get_currency():
     return _('DH')
 
 
+def send_mailgun(subject, message_txt, from_address, receivers, html_message=None):
+    return requests.post(
+        "https://api.mailgun.net/v3/" + settings.MAILGUN_DOMAIN_NAME + "/messages",
+        auth=("api", settings.MAILGUN_APIKEY),
+        data={
+            "from": from_address,
+            "to": receivers,
+            "subject": subject,
+            "text": message_txt,
+            "html": html_message,
+        }
+    )
+
+
 @after_response.enable
 def send_email(subject, message_txt, list_emails, html_message=None):
     """
@@ -48,6 +62,8 @@ def send_email(subject, message_txt, list_emails, html_message=None):
     """
     if settings.EMAIL_SMTP_PROVIDER == "sendgrid":
         return send_mail(subject, message_txt, settings.EMAIL_FROM_ADDRESS, list_emails, html_message=html_message)
+    elif settings.EMAIL_SMTP_PROVIDER == "mailgun":
+        return send_mailgun(subject, message_txt, settings.EMAIL_FROM_ADDRESS, list_emails, html_message=html_message)
     else:
         return "no_smtp_email_provider"
 
