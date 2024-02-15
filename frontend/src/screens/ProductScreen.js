@@ -9,7 +9,7 @@ import { listProductDetails, createProductReview } from '../actions/productActio
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {get_currency} from "../utils";
+import {render_currency} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -85,7 +85,7 @@ function ProductScreen({ match, history, t }) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <span>{t("Price")}: </span><span>{product.price}</span><span>{t(get_currency())}</span>
+                                            <span>{t("Price")}: </span><span>{product.price}</span><span>{t(render_currency())}</span>
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -102,7 +102,7 @@ function ProductScreen({ match, history, t }) {
                                                 <Row>
                                                     <Col>{t("Price")}:</Col>
                                                     <Col>
-                                                        <strong style={{display: "flex"}}><span>{product.price}</span><span>{t(get_currency())}</span></strong>
+                                                        <strong style={{display: "flex"}}><span>{product.price}</span><span>{t(render_currency())}</span></strong>
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>

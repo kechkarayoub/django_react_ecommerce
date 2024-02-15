@@ -14,7 +14,7 @@ function PaymentScreen({ history, t }) {
 
     const dispatch = useDispatch()
 
-    const [paymentMethod, setPaymentMethod] = useState('PayPal')
+    const [paymentMethod, setPaymentMethod] = useState('cmi')
 
     if (!shippingAddress.address) {
         history.push('/shipping')
@@ -40,7 +40,19 @@ function PaymentScreen({ history, t }) {
                             label='PayPal or Credit Card'
                             id='paypal'
                             name='paymentMethod'
-                            checked
+                            checked={paymentMethod == "PayPal"}
+                            value={"PayPal"}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                        >
+
+                        </Form.Check>
+                        <Form.Check
+                            type='radio'
+                            label='CMI'
+                            id='cmi'
+                            name='paymentMethod'
+                            checked={paymentMethod == "cmi"}
+                            value={"cmi"}
                             onChange={(e) => setPaymentMethod(e.target.value)}
                         >
 

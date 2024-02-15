@@ -4,7 +4,7 @@ import Rating from './Rating'
 import { Link } from 'react-router-dom'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {get_currency} from "../utils";
+import {render_currency} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -31,7 +31,7 @@ function Product({ product, t }) {
 
 
                 <Card.Text as="h3"  style={current_language == "ar" ? {display: "flex"} : {}}>
-                    <span>{product.price}</span><span>{t(get_currency())}</span>
+                    <span>{product.price}</span><span>{t(render_currency())}</span>
                 </Card.Text>
             </Card.Body>
         </Card>

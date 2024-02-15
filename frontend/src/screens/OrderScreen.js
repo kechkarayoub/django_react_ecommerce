@@ -9,7 +9,7 @@ import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {get_currency} from "../utils";
+import {render_currency, get_currency} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -78,6 +78,8 @@ function OrderScreen({ match, history, t }) {
         dispatch(deliverOrder(order))
     }
     const current_language = get("current_language");
+    const paymentMethod = get("paymentMethod");
+    
 
     return loading ? (
         <Loader />
@@ -143,7 +145,7 @@ function OrderScreen({ match, history, t }) {
                                                         </Col>
 
                                                         <Col md={5} style={{direction: "ltr"}}>
-                                                            <span>{item.qty}</span><span> X </span><span>{item.price}</span><span>{t(get_currency())}</span><span> = </span><span>{(item.qty * item.price).toFixed(2)}</span><span>{t(get_currency())}</span>
+                                                            <span>{item.qty}</span><span> X </span><span>{item.price}</span><span>{t(render_currency())}</span><span> = </span><span>{(item.qty * item.price).toFixed(2)}</span><span>{t(render_currency())}</span>
                                                         </Col>
                                                     </Row>
                                                 </ListGroup.Item>
@@ -166,28 +168,28 @@ function OrderScreen({ match, history, t }) {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Items")}:</Col>
-                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.itemsPrice}</span><span>{t(get_currency())}</span></Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.itemsPrice}</span><span>{t(render_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Shipping")}:</Col>
-                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.shippingPrice}</span><span>{t(get_currency())}</span></Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.shippingPrice}</span><span>{t(render_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Tax")}:</Col>
-                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.taxPrice}</span><span>{t(get_currency())}</span></Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.taxPrice}</span><span>{t(render_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>{t("Total")}:</Col>
-                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.totalPrice}</span><span>{t(get_currency())}</span></Col>
+                                            <Col style={current_language == 'ar' ? {} : {}}><span>{order.totalPrice}</span><span>{t(render_currency())}</span></Col>
                                         </Row>
                                     </ListGroup.Item>
 
@@ -196,14 +198,23 @@ function OrderScreen({ match, history, t }) {
                                         <ListGroup.Item>
                                             {loadingPay && <Loader />}
 
-                                            {!sdkReady ? (
-                                                <Loader />
-                                            ) : (
-                                                    <PayPalButton
-                                                        amount={order.totalPrice}
-                                                        onSuccess={successPaymentHandler}
-                                                    />
-                                                )}
+                                            {paymentMethod == "cmi" ?
+                                                <>
+                                                    to develope
+                                                </>
+                                            :
+                                                <>
+                                                    {!sdkReady ? (
+                                                        <Loader />
+                                                    ) : (
+                                                            <PayPalButton
+                                                                amount={order.totalPrice}
+                                                                onSuccess={successPaymentHandler}
+                                                            />
+                                                        )}
+                                                </>
+                                            }
+
                                         </ListGroup.Item>
                                     )}
                                 </ListGroup>

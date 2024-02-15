@@ -4,7 +4,7 @@ import Rating from './Rating'
 import { Link } from 'react-router-dom'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {get_currency} from "../utils";
+import {render_currency} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 

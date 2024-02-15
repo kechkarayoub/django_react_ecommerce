@@ -8,7 +8,7 @@ import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {get_currency} from "../utils";
+import {render_currency} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -97,7 +97,7 @@ function PlaceOrderScreen({ history, t }) {
                                                     </Col>
 
                                                     <Col md={5} style={{direction: "ltr"}}>
-                                                        <span>{item.qty}</span> <span>X</span> <span>{item.price}{t(get_currency())}</span> <span>=</span> <span>{(item.qty * item.price).toFixed(2)}{t(get_currency())}</span>
+                                                        <span>{item.qty}</span> <span>X</span> <span>{item.price}{t(render_currency())}</span> <span>=</span> <span>{(item.qty * item.price).toFixed(2)}{t(render_currency())}</span>
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>
@@ -120,28 +120,28 @@ function PlaceOrderScreen({ history, t }) {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Items")}:</Col>
-                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.itemsPrice}</span><span>{t(get_currency())}</span></Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.itemsPrice}</span><span>{t(render_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Shipping")}:</Col>
-                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.shippingPrice}</span><span>{t(get_currency())}</span></Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.shippingPrice}</span><span>{t(render_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Tax")}:</Col>
-                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.taxPrice}</span><span>{t(get_currency())}</span></Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.taxPrice}</span><span>{t(render_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>{t("Total")}:</Col>
-                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.totalPrice}</span><span>{t(get_currency())}</span></Col>
+                                    <Col style={current_language == 'ar' ? {} : {}}><span>{cart.totalPrice}</span><span>{t(render_currency())}</span></Col>
                                 </Row>
                             </ListGroup.Item>
 

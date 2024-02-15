@@ -5,9 +5,12 @@ export const get_site_infos = () => {
         site_name: "ProShop",
     };
 };
-export const get_currency = () => {
+export const render_currency = () => {
     if(true) return '$';
     return 'DH';
+};
+export const get_currency = () => {
+    return 'usd';
 };
 
 export const validateEmail = (email) => {

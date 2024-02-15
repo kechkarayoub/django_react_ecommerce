@@ -10,7 +10,7 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 import { listMyOrders } from '../actions/orderActions'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {get_currency} from "../utils";
+import {render_currency} from "../utils";
 
 function ProfileScreen({ history, t }) {
 
@@ -156,7 +156,7 @@ function ProfileScreen({ history, t }) {
                                         <tr key={order._id}>
                                             <td>{order._id}</td>
                                             <td>{order.createdAt.substring(0, 10)}</td>
-                                            <td><span>{order.totalPrice}</span><span>{t(get_currency())}</span></td>
+                                            <td><span>{order.totalPrice}</span><span>{t(render_currency())}</span></td>
                                             <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
                                                 <i className='fas fa-times' style={{ color: 'red' }}></i>
                                             )}</td>

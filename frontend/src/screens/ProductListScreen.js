@@ -9,7 +9,7 @@ import { listProducts, deleteProduct, createProduct } from '../actions/productAc
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {get_currency} from "../utils";
+import {render_currency} from "../utils";
 
 function ProductListScreen({ history, match, t }) {
 
@@ -101,7 +101,7 @@ function ProductListScreen({ history, match, t }) {
                                         <tr key={product._id}>
                                             <td>{product._id}</td>
                                             <td>{product.name}</td>
-                                            <td style={{display: "inline-flex", border: 0}}><span>{product.price}</span><span>{t(get_currency())}</span></td>
+                                            <td style={{display: "inline-flex", border: 0}}><span>{product.price}</span><span>{t(render_currency())}</span></td>
                                             <td>{product.category}</td>
                                             <td>{product.brand}</td>
 
