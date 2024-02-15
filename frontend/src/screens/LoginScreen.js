@@ -35,7 +35,7 @@ function LoginScreen({ location, history, t }) {
     return (
         <FormContainer class_name={"custom_form_container login_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <h1>{t("Sign In")}</h1>
-            {error && <Message variant='danger'>{error}</Message>}
+            {error && <Message variant='danger' style={current_language == "ar" ? {textAlign: "right"} : {}}>{t(error)}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
 

@@ -77,6 +77,7 @@
   "NAME": "الاسم",
   "Name": "الاسم",
   "New Customer?": "عميل جديد؟",
+  "No active account found with the given credentials": "لم يتم العثور على حساب نشط ببيانات الاعتماد المقدمة",
   "No Reviews": "لا يوجد مراجعات",
   "Not Delivered": "لم يتم التسليم",
   "Not Paid": "لم يتم الدفع",
