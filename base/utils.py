@@ -17,6 +17,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 BG_COLORS_CHOICES = ["#f36422", "#ffee02", "#f070a9", "#00adef", "#7cc142", "#d02b49"]
 
 
+def encrypt_int(value, key=1251):
+    # Encrypt the value using XOR operation
+    encrypted_value = int(key) ^ int(value)
+    return encrypted_value
+
+
+def decrypt_int(encrypted_value, key=1251):
+    # Decrypt the value using XOR operation
+    decrypted_value = int(key) ^ int(encrypted_value)
+    return decrypted_value
+
+
 def get_random_bg_color():
     return random.choice(BG_COLORS_CHOICES)
 
@@ -31,10 +43,13 @@ def date_from_string(date_string):
     except:
         return None
 
+def get_currency_iso():
+    return "504"
+
 def get_currency():
-    if True:
-        return "$"
-    return _('DH')
+    if get_currency_iso() == "504":
+        return _('DH')
+    return "$"
 
 
 def send_mailgun(subject, message_txt, from_address, receivers, html_message=None):

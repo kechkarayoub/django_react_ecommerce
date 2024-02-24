@@ -1,6 +1,8 @@
 Create .env file in frontend folder with this content:
     NODE_PATH=src/
-    REACT_APP_URL_BACKEND=http://127.0.0.1:8080/
-    REACT_APP_URL_FRONTEND=http://localhost:3000/
+    REACT_APP_URL_BACKEND=http://127.0.0.1:8080
+    REACT_APP_URL_FRONTEND=http://localhost:3000
+    REACT_APP_CMI_STORE_KEY='Sanady2024'
+    REACT_APP_CMI_CLIENT_ID='600000984'
     REACT_APP_CODE_MODE='local_dev'
     NODE_ENV="developpement"

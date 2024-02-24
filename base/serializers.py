@@ -87,6 +87,7 @@ class OrderSerializer(serializers.ModelSerializer):
     orderItems = serializers.SerializerMethodField(read_only=True)
     shippingAddress = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
+    crypted_id = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Order
@@ -109,3 +110,6 @@ class OrderSerializer(serializers.ModelSerializer):
         user = obj.user
         serializer = UserSerializer(user, many=False)
         return serializer.data
+
+    def get_crypted_id(self, obj):  # Implement method to get crypted_id
+        return obj.crypted_id

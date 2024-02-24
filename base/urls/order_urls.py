@@ -12,4 +12,5 @@ urlpatterns = [
 
     path('<str:pk>/', views.getOrderById, name='user-order'),
     path('<str:pk>/pay/', views.updateOrderToPaid, name='pay'),
+    path('cmi_callback_api', views.cmi_callback_api, name='cmi_callback_api'),
 ]

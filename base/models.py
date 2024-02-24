@@ -2,6 +2,7 @@ from django.db import models
 from colorfield.fields import ColorField
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from .utils import encrypt_int, decrypt_int
 
 
 class User(AbstractUser):
@@ -83,6 +84,14 @@ class Newsletter(models.Model):
 
 
 class Order(models.Model):
+
+    STATUS_CHOICES = (
+        ('PENDING', 'Pending'),
+        ('PROCESSING', 'Processing'),
+        ('COMPLETED', 'Completed'),
+        ('CANCELLED', 'Cancelled'),
+    )
+
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     paymentMethod = models.CharField(max_length=200, null=True, blank=True, db_index=True)
     taxPrice = models.DecimalField(
@@ -99,9 +108,33 @@ class Order(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
     is_active = models.BooleanField(db_index=True, default=True)
     _id = models.AutoField(primary_key=True, editable=False)
+    # cmi attributes
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING', db_index=True)
+    traited = models.BooleanField(default=False, db_index=True)
+    transaction_code = models.CharField(max_length=255, db_index=True, default="")
+    transaction_id = models.CharField(max_length=255, db_index=True, default="")
+    mdStatus = models.CharField(max_length=255, db_index=True, default="")
+    payment_verification_from_user_navigator = models.BooleanField(db_index=True, default=False)
 
     def __str__(self):
         return str(self.createdAt)
+
+    @property
+    def crypted_id(self):
+        return self.crypt_id()
+
+    def crypt_id(self):
+        id_ = self._id
+        crypted_id = encrypt_int(id_, key=1251)
+        return crypted_id
+
+    @classmethod
+    def decrypt_id(cls, crypted_id):
+        id_ = decrypt_int(crypted_id, key=1251)
+        try:
+            return int(id_)
+        except:
+            return id_
 
 
 class OrderItem(models.Model):

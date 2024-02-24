@@ -9,6 +9,9 @@ import {
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
 
+    ORDER_PAYMENT_DETAILS_SUCCESS,
+    ORDER_PAYMENT_DETAILS_FAIL,
+
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
@@ -67,7 +70,7 @@ export const orderDetailsReducer = (state = { loading: true, orderItems: [], shi
                 ...state,
                 loading: true
             }
-
+            
         case ORDER_DETAILS_SUCCESS:
             return {
                 loading: false,
@@ -75,6 +78,18 @@ export const orderDetailsReducer = (state = { loading: true, orderItems: [], shi
             }
 
         case ORDER_DETAILS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case ORDER_PAYMENT_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                order: action.payload
+            }
+
+        case ORDER_PAYMENT_DETAILS_FAIL:
             return {
                 loading: false,
                 error: action.payload

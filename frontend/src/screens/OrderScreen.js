@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { PayPalButton } from 'react-paypal-button-v2'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
+import { getOrderDetails, payOrder, deliverOrder, setOrderPaymentDetails } from '../actions/orderActions'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
-import {render_currency, get_currency} from "../utils";
+import {render_currency, get_currency_iso, get_cmi_hash, get_random_str, submit_cmi_modal} from "../utils";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -32,6 +32,23 @@ function OrderScreen({ match, history, t }) {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const [orderData, setOrderData] = useState(null);
+    var queryParams = new URLSearchParams(window.location.search);
+    // Access specific query parameters
+    const payment_failure = queryParams.get('payment_failure');
+    const payment_success = queryParams.get('payment_success');
+    if((payment_failure || payment_success) && !orderData){
+        var order_id = queryParams.get("oid");
+        setOrderData({
+            TRANID: queryParams.get("TRANID"),
+            amount: queryParams.get("amount"),
+            ProcReturnCode: queryParams.get("ProcReturnCode"),
+            mdStatus: queryParams.get("mdStatus"),
+            order_id: order_id,
+            payment_failure: payment_failure,
+            payment_success: payment_success,
+        });
+    }
 
     if (!loading && !error) {
         order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
@@ -54,8 +71,23 @@ function OrderScreen({ match, history, t }) {
         if (!userInfo) {
             history.push('/login')
         }
-
-        if (!order || successPay || order._id !== Number(orderId) || successDeliver) {
+        if(process.env.REACT_APP_CODE_MODE === "local_dev" && orderData){
+            if(orderData.order_id){
+                var data = {
+                    action: "payment_result",
+                    from_user_navigator: true,
+                    order_id: orderData.order_id,
+                    payment_success: orderData.payment_success,
+                    payment_failure: orderData.payment_failure,
+                    TRANID: orderData.TRANID,
+                    amount: orderData.amount,
+                    ProcReturnCode: orderData.ProcReturnCode,
+                    mdStatus: orderData.mdStatus,
+                };
+                dispatch(setOrderPaymentDetails(data));
+            }
+        }
+        else if (!order || successPay || order._id !== Number(orderId) || successDeliver) {
             dispatch({ type: ORDER_PAY_RESET })
             dispatch({ type: ORDER_DELIVER_RESET })
 
@@ -79,7 +111,8 @@ function OrderScreen({ match, history, t }) {
     }
     const current_language = get("current_language");
     const paymentMethod = get("paymentMethod");
-    
+    const cmiStoreKey = process.env.REACT_APP_CMI_STORE_KEY;
+    const cmiClientId = process.env.REACT_APP_CMI_CLIENT_ID;
 
     return loading ? (
         <Loader />
@@ -198,9 +231,39 @@ function OrderScreen({ match, history, t }) {
                                         <ListGroup.Item>
                                             {loadingPay && <Loader />}
 
-                                            {paymentMethod == "cmi" ?
+                                            {(order.paymentMethod || paymentMethod) == "cmi" ?
                                                 <>
-                                                    to develope
+                                                    <button className='pay' onClick={evt => {
+                                                        
+                                                        var rnd = get_random_str();
+                                                        var data = {
+                                                          clientid: cmiClientId,
+                                                          storetype: "3D_PAY_HOSTING",
+                                                          TranType: "PreAuth",
+                                                          oid: order.crypted_id + "",
+                                                          amount: order.totalPrice + "",
+                                                          currency: get_currency_iso(),
+                                                          okUrl: process.env.REACT_APP_URL_FRONTEND + window.location.pathname + "?payment_success=true",
+                                                          failUrl: process.env.REACT_APP_URL_FRONTEND + window.location.pathname + "?payment_failure=true",
+                                                          CallbackResponse: process.env.REACT_APP_CODE_MODE !== "local_dev",
+                                                          callbackUrl: process.env.REACT_APP_URL_BACKEND + "/order/cmi_callback_api",
+                                                          lang: current_language,
+                                                          hashAlgorithm: "ver3",
+                                                          redirectGet: "TRUE",
+                                                        //   rnd: rnd,
+                                                        }
+                                                        data.encoding = "UTF-8";
+                                                        data.hash = get_cmi_hash(data, cmiStoreKey);
+                                                        data.storeKey = cmiStoreKey;
+                                                        var data_ = "";
+                                                        var data_keys = Object.keys(data).length;
+                                                        Object.keys(data).map((key, idx) => {
+                                                          data_ += key + "=" + data[key] + (idx < data_keys - 1 ? "&" : "");
+                                                        });
+                                                        submit_cmi_modal(data, process.env.REACT_APP_CODE_MODE == "prod");
+                                                    }}>
+                                                        {t("Pay")}
+                                                    </button>
                                                 </>
                                             :
                                                 <>
