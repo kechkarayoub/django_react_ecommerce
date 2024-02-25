@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
 import { withTranslation } from 'react-i18next';
+import CustomTSNotice from "../components/CustomTSNotice"
 import {get} from "../storage";
 
 function RegisterScreen({ location, history, t }) {
@@ -23,6 +24,8 @@ function RegisterScreen({ location, history, t }) {
 
     const userRegister = useSelector(state => state.userRegister)
     const { error, loading, userInfo } = userRegister
+
+    const registration_label = t("Register");
 
     useEffect(() => {
         if (userInfo) {
@@ -98,8 +101,12 @@ function RegisterScreen({ location, history, t }) {
                     </Form.Control>
                 </Form.Group>
 
+                <Form.Group>
+                  <CustomTSNotice added_class="col-12 col-md-12" registration_label={registration_label}/>
+                </Form.Group>
+
                 <Button type='submit' variant='primary'>
-                    {t("Register")}
+                    {registration_label}
                 </Button>
 
             </Form>

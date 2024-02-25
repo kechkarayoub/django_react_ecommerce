@@ -6,3 +6,8 @@ Create .env file in frontend folder with this content:
     REACT_APP_CMI_CLIENT_ID='600000984'
     REACT_APP_CODE_MODE='local_dev'
     NODE_ENV="developpement"
+
+
+Change data in frontend/.env
+Change data in frontend/src/app_config.js
+Change data in frontend/src/utils.js

@@ -16,7 +16,8 @@ class User(AbstractUser):
             models.Index(fields=['last_name']),
             models.Index(fields=['email']),
         ]
-    language = models.TextField(max_length=10, default="fr", choices=settings.LANGUAGES, db_index=True)
+    language = models.CharField(max_length=10, default="fr", choices=settings.LANGUAGES, db_index=True)
+    last_terms_of_services_accepted = models.BooleanField(max_length=10, default=False, db_index=True)
 
 
 # Create your models here.

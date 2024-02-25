@@ -68,3 +68,11 @@ export const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
+
+export const get_terms_service_notice = (props) => {
+  return {
+      ar: `بالضغط على <b>${props.registration_label}</b> ، فإنك توافق على <span class="span_link term_of_service_span">شروط الخدمة</span> الخاصة بنا ، و<span class="span_link data_use_policy_span">سياسة استخدام البيانات</span> و<span class="span_link cookie_policy_span">سياسة ملفات تعريف الارتباط</span> الخاصة بنا.`,
+      en: `By pressing <b>${props.registration_label}</b>, you agree to our <span class="span_link term_of_service_span">Terms of service</span>, our <span class="span_link data_use_policy_span">Data Use Policy</span> and our <span class="span_link cookie_policy_span">Cookie Policy</span>.`,
+      fr: `En appuyant sur <b>${props.registration_label}</b>, vous acceptez nos <span class="span_link term_of_service_span">Conditions d'utilisation</span>, notre <span class="span_link data_use_policy_span">Politique d'utilisation des données</span> et notre <span class="span_link cookie_policy_span">Politique d'utilisation des cookies</span>.`,
+  };
+};

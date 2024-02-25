@@ -34,6 +34,7 @@ def registerUser(request):
             username=data['email'],
             email=data['email'],
             language=data.get('language', "fr"),
+            last_terms_of_services_accepted=data.get('last_terms_of_services_accepted') is True,
             password=make_password(data['password'])
         )
 
@@ -55,6 +56,7 @@ def updateUserProfile(request):
     user.username = data['email']
     user.email = data['email']
     user.language = data.get('language', "fr") if "language" in data else user.language
+    user.last_terms_of_services_accepted = data.get("last_terms_of_services_accepted") is True if "last_terms_of_services_accepted" in data else user.last_terms_of_services_accepted
 
     if data['password'] != '':
         user.password = make_password(data['password'])
@@ -113,6 +115,7 @@ def updateUser(request, pk):
     user.email = data['email']
     user.is_staff = data['isAdmin']
     user.language = data.get('language', "fr") if "language" in data else user.language
+    user.language = data.get('last_terms_of_services_accepted') is True if "last_terms_of_services_accepted" in data else user.last_terms_of_services_accepted
 
     user.save()
 

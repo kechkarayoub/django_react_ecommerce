@@ -55,4 +55,6 @@ Create newsletter script to add it to crontab:
 Configure webserver to serve media files:
     You need to configure your web server (e.g., Nginx, Apache) to serve media files from the directory specified by MEDIA_ROOT.
 
+Change data in settings.py
+
 
