@@ -4,3 +4,5 @@ export const ACTIVATE_SOCIAL_NETWORK_PAGES = true;
 export const ACTIVATE_TRANSLATONS = true;
 export const DEFAULT_LANGUAGE = "fr";
 export const TAX_PERCENT = 20;
+export const SHIPPING_PRICE = 30;
+export const CONSIDIRING_SHIPPING_PRICE_FREE_AT = 800;

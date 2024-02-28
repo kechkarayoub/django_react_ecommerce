@@ -9,7 +9,7 @@ import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
 import {render_currency} from "../utils";
-import {TAX_PERCENT} from "../app_config";
+import {TAX_PERCENT, SHIPPING_PRICE, CONSIDIRING_SHIPPING_PRICE_FREE_AT} from "../app_config";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -23,7 +23,7 @@ function PlaceOrderScreen({ history, t }) {
     const cart = useSelector(state => state.cart)
 
     cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
-    cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2)
+    cart.shippingPrice = (cart.itemsPrice > CONSIDIRING_SHIPPING_PRICE_FREE_AT ? 0 : SHIPPING_PRICE).toFixed(2)
     cart.taxPrice = Number((parseFloat(TAX_PERCENT) / 100) * cart.itemsPrice).toFixed(2)
 
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
