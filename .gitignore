@@ -11,6 +11,7 @@ staticfiles/
 *.db
 *.sqlite3
 *.log
+*.log.*
 **/migrations/
 **/migrations/__init__.py
 **/migrations/*.pyc

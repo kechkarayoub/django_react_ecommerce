@@ -12,6 +12,9 @@ from django.utils.translation import activate, gettext_lazy as _
 from ..utils import send_email, get_img_as_base64, get_static_logo_url, get_currency
 from rest_framework import status
 import datetime
+import logging
+
+logger = logging.getLogger("django")
 
 
 @after_response.enable
@@ -59,7 +62,7 @@ def projects_newsletter():
         """
         response = send_email(email_subject, email_message_txt, emails, html_message=email_message_html)
         if response == "no_smtp_email_provider":
-            print(_('You should configure a smtp email provider'))
+            logger.warning(_('You should configure a smtp email provider'))
 
 
 @api_view(['GET'])

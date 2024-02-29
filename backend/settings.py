@@ -211,6 +211,41 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 #AWS_STORAGE_BUCKET_NAME = 'proshop-bucket-demo'
 
+# LOGGING_CONFIG = None
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'main_formatter': {
+            'format': '[{asctime} - {levelname} - {module} - {filename} - {lineno}]: {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/main_log.log',
+            'formatter': 'main_formatter',
+            'level': 'WARNING',
+            'backupCount': 10,  # keep at most 10 log files
+            'maxBytes': 5242880,  # 5*1024*1024 bytes (5MB)
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'main_formatter',
+            'level': 'WARNING',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+}
+
+
 
 if os.getcwd() == '/app':
     DEBUG = False
