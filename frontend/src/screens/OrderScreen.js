@@ -10,6 +10,7 @@ import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstant
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
 import {render_currency, get_currency_iso, get_cmi_hash, get_random_str, submit_cmi_modal} from "../utils";
+import {PAYMENTS_METHODS_CHOICES} from "../app_config"
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -148,7 +149,7 @@ function OrderScreen({ match, history, t }) {
                                     <h2>{t("Payment Method")}</h2>
                                     <p>
                                         <strong>{t("Method")}: </strong>
-                                        {order.paymentMethod}
+                                        {t(PAYMENTS_METHODS_CHOICES[order.paymentMethod] || order.paymentMethod)}
                                     </p>
                                     {order.isPaid ? (
                                         <Message variant='success'>{t("Paid on")} {order.paidAt}</Message>
@@ -267,14 +268,24 @@ function OrderScreen({ match, history, t }) {
                                                 </>
                                             :
                                                 <>
-                                                    {!sdkReady ? (
-                                                        <Loader />
-                                                    ) : (
-                                                            <PayPalButton
-                                                                amount={order.totalPrice}
-                                                                onSuccess={successPaymentHandler}
-                                                            />
-                                                        )}
+                                                    {(order.paymentMethod || paymentMethod) == "cod" ?
+                                                        <>
+                                                            <div className='cash_on_delivery'>
+                                                                {t("Cash on delivery")}
+                                                            </div>
+                                                        </>
+                                                    :
+                                                        <>
+                                                            {!sdkReady ? (
+                                                                <Loader />
+                                                            ) : (
+                                                                    <PayPalButton
+                                                                        amount={order.totalPrice}
+                                                                        onSuccess={successPaymentHandler}
+                                                                    />
+                                                                )}
+                                                        </>
+                                                    }
                                                 </>
                                             }
 
@@ -282,7 +293,7 @@ function OrderScreen({ match, history, t }) {
                                     )}
                                 </ListGroup>
                                 {loadingDeliver && <Loader />}
-                                {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                {userInfo && userInfo.isAdmin && (order.isPaid || order.paymentMethod == "cod") && !order.isDelivered && (
                                     <ListGroup.Item>
                                         <Button
                                             type='button'

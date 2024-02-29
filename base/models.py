@@ -92,9 +92,15 @@ class Order(models.Model):
         ('COMPLETED', 'Completed'),
         ('CANCELLED', 'Cancelled'),
     )
+    PAYMENTS_METHODS_CHOICES = (
+        ('', 'Select'),
+        ('cmi', 'CMI'),
+        ('paypal', 'Paypal'),
+        ('cod', 'Cash on delivery'),
+    )
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    paymentMethod = models.CharField(max_length=200, null=True, blank=True, db_index=True)
+    paymentMethod = models.CharField(max_length=200, null=True, blank=True, db_index=True, default="", choices=PAYMENTS_METHODS_CHOICES)
     taxPrice = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
     shippingPrice = models.DecimalField(
@@ -112,9 +118,9 @@ class Order(models.Model):
     # cmi attributes
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING', db_index=True)
     traited = models.BooleanField(default=False, db_index=True)
-    transaction_code = models.CharField(max_length=255, db_index=True, default="")
-    transaction_id = models.CharField(max_length=255, db_index=True, default="")
-    mdStatus = models.CharField(max_length=255, db_index=True, default="")
+    transaction_code = models.CharField(max_length=255, db_index=True, default="", blank=True)
+    transaction_id = models.CharField(max_length=255, db_index=True, default="", blank=True)
+    mdStatus = models.CharField(max_length=255, db_index=True, default="", blank=True)
     payment_verification_from_user_navigator = models.BooleanField(db_index=True, default=False)
 
     def __str__(self):

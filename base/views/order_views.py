@@ -170,6 +170,9 @@ def cmi_callback_api(request):
 def updateOrderToDelivered(request, pk):
     order = Order.objects.get(_id=pk)
 
+    if order.paymentMethod == "cod":
+        order.isPaid = True
+        order.paidAt = datetime.now()
     order.isDelivered = True
     order.deliveredAt = datetime.now()
     order.save()

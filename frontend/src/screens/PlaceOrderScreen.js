@@ -9,7 +9,7 @@ import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { withTranslation } from 'react-i18next';
 import {get} from "../storage";
 import {render_currency} from "../utils";
-import {TAX_PERCENT, SHIPPING_PRICE, CONSIDIRING_SHIPPING_PRICE_FREE_AT} from "../app_config";
+import {TAX_PERCENT, SHIPPING_PRICE, CONSIDIRING_SHIPPING_PRICE_FREE_AT, PAYMENTS_METHODS_CHOICES} from "../app_config";
 
 const BACKEND_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -76,7 +76,7 @@ function PlaceOrderScreen({ history, t }) {
                             <h2>{t("Payment Method")}</h2>
                             <p>
                                 <strong>{t("Method")}: </strong>
-                                {cart.paymentMethod}
+                                {t(PAYMENTS_METHODS_CHOICES[cart.paymentMethod] || cart.paymentMethod)}
                             </p>
                         </ListGroup.Item>
 
