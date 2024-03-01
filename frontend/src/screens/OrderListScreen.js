@@ -38,7 +38,7 @@ function OrderListScreen({ history, t }) {
             {loading
                 ? (<Loader />)
                 : error
-                    ? (<Message variant='danger'>{error}</Message>)
+                    ? (<Message variant='danger'>{t(error)}</Message>)
                     : (
                         <Table striped bordered hover responsive className='table-sm'>
                             <thead>

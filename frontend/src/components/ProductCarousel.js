@@ -24,7 +24,7 @@ function ProductCarousel({t}) {
     const current_language = get("current_language");
     return (loading ? <Loader />
         : error
-            ? <Message variant='danger'>{error}</Message>
+            ? <Message variant='danger'>{t(error)}</Message>
             : (
                 <Carousel pause='hover' className={'bg-dark ' + (current_language == "ar" ? 'rtl' : 'ltr')}>
                     {products.map(product => (

@@ -48,8 +48,8 @@ function RegisterScreen({ location, history, t }) {
     return (
         <FormContainer class_name={"custom_form_container sign_in_form " + (current_language == "ar" ? 'rtl' : 'ltr')}>
             <h1>{t("Sign Up")}</h1>
-            {message && <Message variant='danger'>{message}</Message>}
-            {error && <Message variant='danger'>{error}</Message>}
+            {message && <Message variant='danger'>{t(message)}</Message>}
+            {error && <Message variant='danger'>{t(error)}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
 

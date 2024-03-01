@@ -59,9 +59,9 @@ function UserEditScreen({ match, history, t }) {
             <FormContainer>
                 <h1>{t("Edit User")}</h1>
                 {loadingUpdate && <Loader />}
-                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+                {errorUpdate && <Message variant='danger'>{t(errorUpdate)}</Message>}
 
-                {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
+                {loading ? <Loader /> : error ? <Message variant='danger'>{t(error)}</Message>
                     : (
                         <Form onSubmit={submitHandler}>
 

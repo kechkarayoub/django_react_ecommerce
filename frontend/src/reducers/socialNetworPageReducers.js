@@ -14,11 +14,11 @@ export const socialNetworkPageListReducer = (state = { social_network_pages: [] 
         case SOCIAL_NETWORK_PAGE_LIST_SUCCESS:
             return {
                 loading_sn: false,
-                social_network_pages: action.payload.social_network_pages,
+                social_network_pages: action.payload.social_network_pages || [],
             }
 
         case SOCIAL_NETWORK_PAGE_LIST_FAIL:
-            return { loading: false, error_sn: action.payload }
+            return { loading: false, error_sn: action.payload, social_network_pages: [] }
 
         default:
             return state

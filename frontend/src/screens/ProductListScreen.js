@@ -72,16 +72,16 @@ function ProductListScreen({ history, match, t }) {
             </Row>
 
             {loadingDelete && <Loader />}
-            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+            {errorDelete && <Message variant='danger'>{t(errorDelete)}</Message>}
 
 
             {loadingCreate && <Loader />}
-            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+            {errorCreate && <Message variant='danger'>{t(errorCreate)}</Message>}
 
             {loading
                 ? (<Loader />)
                 : error
-                    ? (<Message variant='danger'>{error}</Message>)
+                    ? (<Message variant='danger'>{t(error)}</Message>)
                     : (
                         <div>
                             <Table striped bordered hover responsive className='table-sm'>

@@ -118,7 +118,7 @@ function OrderScreen({ match, history, t }) {
     return loading ? (
         <Loader />
     ) : error ? (
-        <Message variant='danger' class_name={"custom_message " + (current_language == "ar" ? 'rtl' : 'ltr')}>{error}</Message>
+        <Message variant='danger' class_name={"custom_message " + (current_language == "ar" ? 'rtl' : 'ltr')}>{t(error)}</Message>
     ) : (
                 <div className={"order_screen " + (current_language == "ar" ? 'rtl' : 'ltr')}>
                     <h1>{t("Order")}: {order.Id}</h1>

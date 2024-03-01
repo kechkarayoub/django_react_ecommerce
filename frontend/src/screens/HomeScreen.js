@@ -31,7 +31,7 @@ function HomeScreen({ history, t }) {
 
             <h1>{t('Latest products')}</h1>
             {loading ? <Loader />
-                : error ? <Message variant='danger'>{error}</Message>
+                : error ? <Message variant='danger'>{t(error)}</Message>
                     :
                     <div className='products_list'>
                         <Row>

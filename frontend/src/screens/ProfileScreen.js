@@ -72,8 +72,8 @@ function ProfileScreen({ history, t }) {
             <Col md={3}>
                 <h2>{t("User Profile")}</h2>
 
-                {message && <Message variant='danger'>{message}</Message>}
-                {error && <Message variant='danger'>{error}</Message>}
+                {message && <Message variant='danger'>{t(message)}</Message>}
+                {error && <Message variant='danger'>{t(error)}</Message>}
                 {loading && <Loader />}
                 <Form onSubmit={submitHandler}>
 
@@ -137,7 +137,7 @@ function ProfileScreen({ history, t }) {
                 {loadingOrders ? (
                     <Loader />
                 ) : errorOrders ? (
-                    <Message variant='danger'>{errorOrders}</Message>
+                    <Message variant='danger'>{t(errorOrders)}</Message>
                 ) : (
                             <Table striped responsive className='table-sm'>
                                 <thead>

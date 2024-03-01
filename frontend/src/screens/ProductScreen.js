@@ -65,7 +65,7 @@ function ProductScreen({ match, history, t }) {
             {loading ?
                 <Loader />
                 : error
-                    ? <Message variant='danger'>{error}</Message>
+                    ? <Message variant='danger'>{t(error)}</Message>
                     : (
                         <div>
                             <Row>
@@ -175,7 +175,7 @@ function ProductScreen({ match, history, t }) {
 
                                             {loadingProductReview && <Loader />}
                                             {successProductReview && <Message variant='success'>{t("Review Submitted")}</Message>}
-                                            {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
+                                            {errorProductReview && <Message variant='danger'>{t(errorProductReview)}</Message>}
 
                                             {userInfo ? (
                                                 <Form onSubmit={submitHandler}>

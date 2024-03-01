@@ -148,7 +148,7 @@ function PlaceOrderScreen({ history, t }) {
 
 
                             <ListGroup.Item>
-                                {error && <Message variant='danger'>{error}</Message>}
+                                {error && <Message variant='danger'>{t(error)}</Message>}
                             </ListGroup.Item>
 
                             <ListGroup.Item>
