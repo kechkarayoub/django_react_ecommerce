@@ -31,17 +31,22 @@ export const get_random_str = (length) => {
   }
 
 export const get_cmi_hash = (data, storeKey) => {
-    data = data || {};
-    var hashval = "";
-    var keys = Object.keys(data).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-    let values = keys.filter(k_ => k_ !== "encoding" && k_ !== "hash").map(key =>{
-      return ((data[key] || "") + "").replaceAll("|", "\\|").replaceAll("\\", "\\\\").trim();
-    });
-    hashval = values.join("|") + "|" + storeKey.replaceAll("|", "\\|").replaceAll("\\", "\\\\");
-    var calculatedHashValue = SHA512(hashval);
-      var hash = btoa(pack('H*',calculatedHashValue));
-    return hash;
-  }
+  var hashval = "";
+  var arr = Object.keys(data).sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  });
+
+  arr.map(element => {
+    if( element != "hash" && element != "encoding" ){
+      let escapedParamValue = (data[element] || "").replaceAll("|", "\\|").replaceAll("\\", "\\\\");
+      hashval = hashval + escapedParamValue + "|";
+    }
+  });
+  hashval = hashval + storeKey;
+  let calculatedHashValue = SHA512(hashval); 
+  let hash = btoa(pack('H*',calculatedHashValue));
+  return hash;
+}
   export const submit_cmi_modal = (data, is_prod) => {
     var action = "https://testpayment.cmi.co.ma/fim/est3Dgate";
     if(is_prod){
@@ -58,6 +63,14 @@ export const get_cmi_hash = (data, storeKey) => {
       input.value = data[key];
       form.appendChild(input);
     });
+
+    
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = "redirectGet";
+    input.value = "TRUE";
+    form.appendChild(input);
+    
   
     // Append the form to the document body and submit it
     document.body.appendChild(form);

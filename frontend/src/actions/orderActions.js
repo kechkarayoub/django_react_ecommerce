@@ -138,7 +138,7 @@ export const setOrderPaymentDetails = (order_data) => async (dispatch, getState)
         }
 
         const { data } = await instance_backend.put(
-            `/api/orders/cmi_callback_api/`,
+            `/api/orders_payments/cmi_callback_api/`,
             order_data,
             config
         )
