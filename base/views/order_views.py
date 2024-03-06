@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from base.models import Product, Order, OrderItem, ShippingAddress
 from base.serializers import OrderSerializer
-
+from django.utils import timezone
 from rest_framework import status
 from datetime import datetime
 from django.http import HttpResponse
@@ -106,7 +106,7 @@ def updateOrderToPaid(request, pk):
     order = Order.objects.get(_id=pk)
 
     order.isPaid = True
-    order.paidAt = datetime.now()
+    order.paidAt = timezone.now()
     order.save()
 
     return Response(_('Order was paid'))
@@ -119,9 +119,9 @@ def updateOrderToDelivered(request, pk):
 
     if order.paymentMethod == "cod":
         order.isPaid = True
-        order.paidAt = datetime.now()
+        order.paidAt = timezone.now()
     order.isDelivered = True
-    order.deliveredAt = datetime.now()
+    order.deliveredAt = timezone.now()
     order.save()
 
     return Response(_('Order was delivered'))

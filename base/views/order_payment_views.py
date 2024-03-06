@@ -10,6 +10,7 @@ from rest_framework import status
 from datetime import datetime
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 
 @api_view(['PUT', 'POST'])
@@ -49,7 +50,7 @@ def cmi_callback_api(request):
     order.mdStatus = mdStatus
     if order and transaction_code == '00' and float(order.totalPrice) == float(amount):
         order.isPaid = True
-        order.paidAt = datetime.now()
+        order.paidAt = timezone.now()
     elif order and transaction_code != '00':
         pass
     order.save()
