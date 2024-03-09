@@ -22,19 +22,23 @@ Create backend/local_settings.py with this content:
         }
     }
     # sendgrid django setting
-    SENDGRID_API_KEY = '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'
-    EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-    EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-    EMAIL_PORT = 587
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'your_account@gmail.com'
+    EMAIL_HOST_PASSWORD = 'your account’s password'
     EMAIL_FROM_ADDRESS = 'edxkls2019@gmail.com'
     BACKEND_URL = "http://localhost:8080"
     FRONT_URL = "http://localhost:3000"
     ACTIVATE_SOCIAL_NETWORK_PAGES = True
     SHOW_UNSUBSCRIBE_LINK_ON_EMAILS = True
-    EMAIL_SMTP_PROVIDER = "sendgrid"
-    MAILGUN_DOMAIN_NAME = "sandboxcb64cacb300c4070b8539784fd24e3a3.mailgun.org"
-    MAILGUN_APIKEY = "e83f255dbb6f662e6e0e8ccad6225053-8c8e5529-f84cd7f0"
+    EMAIL_SMTP_PROVIDER = "gmail"
+
+    SENDPLUSE_REST_API_ID = ""
+    SENDPLUSE_REST_API_SECRET = ""
+    SENDPLUSE_TOKEN_STORAGE = ""
+    SENDPLUSE_MEMCACHED_HOST = ""
 
 
 

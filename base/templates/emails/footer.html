@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<footer class="{{direction}}">
+<footer class="{{direction}}" style="max-width: 630px;">
     <div class="row footer_sides">
         {% if ACTIVATE_SOCIAL_NETWORK_PAGES %}
             <div class="md col-md-12 social_network_pages">
@@ -8,7 +8,7 @@
                     {% translate "Follow us on" %}
                 </div>
                 {% if social_network_pages|length == 0 %}
-                    <div class='no_social_network_page'>
+                    <div class='no_social_network_page' style="margin: 0 5px; {% if direction == 'rtl' %} text-align: right; {% endif %}">
                         {% translate "Our social media pages are being implemented." %}
                     </div>
                 {% endif %}
@@ -32,7 +32,7 @@
         {% endif %}
         {% if SHOW_UNSUBSCRIBE_LINK_ON_EMAILS %}
             <div class="md col-md-12 unsubscribe_link">
-                <div class='title'>
+                <div class='title' style="{% if direction == 'rtl' %} flex-direction: row-reverse; {% endif %}">
                     <span>{% translate "Unsubscribe from our newsletter?" %}</span>
                     <a href="{{ unsubscribe_url }}" target="_blank">
                         <div class="card-body">

@@ -1,8 +1,8 @@
 {% load i18n %}
 
-<header class="{{direction}}">
-    <div >
-        <a href="{{site_url}}" target="_blank">
+<header class="{{direction}}" style="max-width: 630px;">
+    <div style="{% if direction == 'rtl' %} text-align: right; {% endif %}">
+        <a href="{{site_url}}" target="_blank"  style="{% if direction == 'rtl' %} float: right; {% endif %}">
             {% if logo_url %}
                 <img src="{{ logo_url }}" alt="{{site_name}}" title="{{site_name}}" />
             {% else %}

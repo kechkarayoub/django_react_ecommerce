@@ -32,7 +32,16 @@ def projects_newsletter():
         return
     for language in Newsletter.objects.filter(is_active=True).values_list("language", flat=True).distinct():
         activate(language)
-        emails = list(Newsletter.objects.filter(is_active=True, language=language).values_list("email", flat=True).distinct())
+        emails_ = list(Newsletter.objects.filter(is_active=True, language=language).values_list("email", flat=True).distinct())
+        if settings.EMAIL_SMTP_PROVIDER in ["brevo", "mailer_send", "sendpluse"]:
+            emails = []
+            i = 0
+            for nm in list(Newsletter.objects.filter(is_active=True, language=language).values_list("name", flat=True).distinct()):
+                emails.append({"email": emails_[i], "name": nm})
+                i += 1
+        else:
+            emails = emails_
+
         email_subject = _("New products {site_name}").format(site_name=settings.SITE_NAME)
         context = {
             "direction": "rtl" if language == "ar" else "ltr",

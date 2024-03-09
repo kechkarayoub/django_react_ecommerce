@@ -10,6 +10,7 @@ import random
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from.sendpluse_email import send_sendpluse_email
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,10 +76,13 @@ def send_email(subject, message_txt, list_emails, html_message=None):
         :param html_message: html_message of the email
         :return: None
     """
-    if settings.EMAIL_SMTP_PROVIDER == "sendgrid":
+    if settings.EMAIL_SMTP_PROVIDER == "gmail":
         return send_mail(subject, message_txt, settings.EMAIL_FROM_ADDRESS, list_emails, html_message=html_message)
-    elif settings.EMAIL_SMTP_PROVIDER == "mailgun":
-        return send_mailgun(subject, message_txt, settings.EMAIL_FROM_ADDRESS, list_emails, html_message=html_message)
+    elif settings.EMAIL_SMTP_PROVIDER == "sendgrid":
+        return send_mail(subject, message_txt, settings.EMAIL_FROM_ADDRESS, list_emails, html_message=html_message)
+    elif settings.EMAIL_SMTP_PROVIDER == "sendpluse":
+        sender = {"name": settings.SITE_NAME, "email": settings.EMAIL_FROM_ADDRESS}
+        return send_sendpluse_email(subject=subject, mail_from=sender, text_content=message_txt, html_content=html_message, recipients=list_emails)
     else:
         return "no_smtp_email_provider"
 

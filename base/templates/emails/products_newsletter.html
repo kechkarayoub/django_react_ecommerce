@@ -82,7 +82,7 @@
 
 {% if False %}@{% endif %}
 {% block content %}
-    <div class="content {{direction}}" style="direction: {{direction}}">
+    <div class="content {{direction}}" style="direction: {{direction}}; max-width: 600px; margin: auto; width: 100%; margin-bottom: 30px;">
         {% for product in products %}
             <div class="card {{direction}}">
                 <div class="image">
@@ -104,8 +104,8 @@
                 </div>
             </div>
         {% endfor %}
-        <div class=" empty card {{direction}}">
-            <div class="button">
+        <div class=" empty card {{direction}}" style="display: flex; flex-direction: column; justify-content: flex-end;">
+            <div class="button" style="margin: auto; margin-bottom: 15px;">
                 <button>
                     <a href="{{site_url}}" target="_blank">{% translate "Show more" %}</a>
                 </button>
