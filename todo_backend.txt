@@ -16,8 +16,8 @@ Create backend/local_settings.py with this content:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'proshop',
             'USER': 'dennisivy',
-            'PASSWORD': os.environ.get('DB_PASS'),
-            'HOST': os.environ.get('HOST'),
+            'PASSWORD': "password",
+            'HOST': "host",
             'PORT': '5432'
         }
     }
