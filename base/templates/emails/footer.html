@@ -4,30 +4,33 @@
     <div class="row footer_sides">
         {% if ACTIVATE_SOCIAL_NETWORK_PAGES %}
             <div class="md col-md-12 social_network_pages">
-                <div class='title'>
-                    {% translate "Follow us on" %}
-                </div>
                 {% if social_network_pages|length == 0 %}
                     <div class='no_social_network_page' style="margin: 0 5px; {% if direction == 'rtl' %} text-align: right; {% endif %}">
                         {% translate "Our social media pages are being implemented." %}
                     </div>
+                {% else %}
+                    <div class='no_social_network_page' style="margin: 0 5px; {% if direction == 'rtl' %} text-align: right; {% endif %}">
+                        {% translate "Follow us on" %}
+                    </div>
                 {% endif %}
-                {% for snp in social_network_pages %}
-                    <div class="card {{direction}} ">
-                        <a href="{{ snp.url }}" target="_blank">
-                            <div class="card-body">
-                                <span class="card-text" >
-                                    <i class="{{snp.font_icon}}"></i>
-                                </span>
-                                <div class="card-text">
-                                    <div class="">
-                                        {{snp.name}}
+                <div class="snp_cards">
+                    {% for snp in social_network_pages %}
+                        <div class="card {{direction}} ">
+                            <a href="{{ snp.url }}" target="_blank">
+                                <div class="card-body">
+                                    <span class="card-text" >
+                                        <img src="{{snp.icon_url}}" class="{{snp.font_icon}}" style="width: 30px; height: 30px;"/>
+                                    </span>
+                                    <div class="card-text">
+                                        <div class="">
+                                            {{snp.name}}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         {% endif %}
         {% if SHOW_UNSUBSCRIBE_LINK_ON_EMAILS %}

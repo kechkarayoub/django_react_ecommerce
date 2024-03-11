@@ -4,6 +4,7 @@ from .models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Product, Order, OrderItem, ShippingAddress, Review, SocialNetworkPage, Newsletter
 
+from django.conf import settings
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
@@ -66,9 +67,13 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class SocialNetworkPageSerializer(serializers.ModelSerializer):
+    icon_url = serializers.SerializerMethodField()
     class Meta:
         model = SocialNetworkPage
         fields = '__all__'
+
+    def get_icon_url(self, obj):
+        return (settings.BACKEND_URL + str(obj.icon_url.url)) if obj.icon_url else ""
 
 
 class ShippingAddressSerializer(serializers.ModelSerializer):

@@ -1,0 +1,27 @@
+- model: base.SocialNetworkPage
+  pk: 1
+  fields:
+    name: 'Facebook'
+    url: 'https://www.facebook.com'
+    icon_url: '/images/facebook.png'
+    font_icon: 'fa-brands fa-square-facebook'
+    description: ''
+    color: '#FFFFFF'
+- model: base.SocialNetworkPage
+  pk: 2
+  fields:
+    name: 'Instagram'
+    url: 'https://www.instagram.com'
+    icon_url: '/images/instagram.png'
+    font_icon: 'fa-brands fa-square-instagram'
+    description: ''
+    color: '#FFFFFF'
+- model: base.SocialNetworkPage
+  pk: 3
+  fields:
+    name: 'Twitter'
+    url: 'https://www.twitter.com'
+    icon_url: '/images/twitter.png'
+    font_icon: 'fa-brands fa-square-twitter'
+    description: ''
+    color: '#FFFFFF'

@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 @api_view(['GET'])
 def getSocialNetworkPages(request):
 
-    social_network_pages = SocialNetworkPage.objects.filter().order_by('name')
+    social_network_pages = SocialNetworkPage.objects.filter().exclude(icon_url__isnull=True).exclude(icon_url="").order_by('name')
 
     serializer = SocialNetworkPageSerializer(social_network_pages, many=True)
     return Response({'social_network_pages': serializer.data})

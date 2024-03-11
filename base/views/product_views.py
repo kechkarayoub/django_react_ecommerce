@@ -22,7 +22,7 @@ def projects_newsletter():
     """
         :return: None
     """
-    social_network_pages = [snp.to_newsletter_dict() for snp in SocialNetworkPage.objects.filter()]
+    social_network_pages = [snp.to_newsletter_dict() for snp in SocialNetworkPage.objects.filter().exclude(icon_url__isnull=True).exclude(icon_url="").order_by('name')]
     date_to_compare = timezone.now() - datetime.timedelta(days=7)
     products_ = Product.objects.filter(is_active=True, createdAt__gte=date_to_compare).order_by("-createdAt")[:5]
     products = []

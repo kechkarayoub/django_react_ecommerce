@@ -178,7 +178,7 @@ class ShippingAddress(models.Model):
 class SocialNetworkPage(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField()
-    icon_url = models.URLField(blank=True, null=True)
+    icon_url = models.ImageField(null=True, blank=True, default='')
     font_icon = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     color = ColorField(default='#FFFFFF')
@@ -191,4 +191,5 @@ class SocialNetworkPage(models.Model):
             "name": self.name,
             "url": self.url,
             "font_icon": self.font_icon,
+            "icon_url": (settings.BACKEND_URL + str(self.icon_url.url)) if self.icon_url else "",
         }
